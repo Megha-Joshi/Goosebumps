@@ -1,0 +1,21 @@
+.nav-cont{
+    display: flex;
+    background-color: var(--primary-color);
+    color: var(--font-color);
+    padding: 1rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-nav{
+    display: flex;
+    gap: 10px;
+    color: var(--font-color);
+}
+
+.nav-btn{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--font-color);
+}
