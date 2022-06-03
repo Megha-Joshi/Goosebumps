@@ -1,0 +1,10 @@
+:root {
+    --primary-color: #0f171e;
+    --secondary-color: #444a50;
+    --accent-color: #262f38;
+    --font-color: whitesmoke;
+}
+
+body {
+    background-color: var(--primary-color);
+}
