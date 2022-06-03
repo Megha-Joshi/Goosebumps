@@ -1,0 +1,24 @@
+.body-cont{
+    height: 100vh;
+}
+
+.img-cont{
+    width: 100%;
+    height: 99%;
+    position: relative;
+}
+
+.home-content{
+    position: absolute;
+    right: 19%;
+    top: 45%;
+    color: var(--font-color);
+}
+
+.home-btn{
+    border: none;
+    background-color: transparent;
+    color: var(--font-color);
+    cursor: pointer;
+    font-size: 1.2rem;
+}
