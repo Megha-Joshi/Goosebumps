@@ -1,0 +1,21 @@
+.side-cont{
+    display: flex;
+    width: 20%;
+    height: 100%;
+    color: var(--font-color);
+    background-color: var(--primary-color);
+}
+
+li{
+    list-style-type: none;
+}
+
+.nav-list{
+    padding: 10px;
+    text-align: start;
+    cursor: pointer;
+}
+
+.nav-icon{
+    padding: 10px;
+}
