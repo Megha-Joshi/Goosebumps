@@ -8,7 +8,7 @@ import { useVideo } from "../../context/videoContext";
 const Homepage = () => {
 const [sidebar, setSideBar] = useState(true);
 const [modal, setModal] = useState(false);
-const { videoState } = useVideo();
+const { videoState, addItemToLikedVideos } = useVideo();
 const { videos, categories } = videoState;
 return (
 <div className="App">
@@ -44,7 +44,7 @@ return (
                         <li className="modal-list"><span className="card-icon"><i
                                     class="fad fa-list"></i></span>Playlist
                         </li>
-                        <li className="modal-list"><span className="card-icon"><i
+                        <li className="modal-list" onClick={() => addItemToLikedVideos(video)}><span className="card-icon"><i
                                     class="fad fa-thumbs-up"></i></span>Liked
                             Videos</li>
                         <li className="modal-list"><span className="card-icon"><i class="fad fa-clock"></i></span>Watch

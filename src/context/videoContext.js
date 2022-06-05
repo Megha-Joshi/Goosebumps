@@ -1,13 +1,14 @@
 import { createContext, useContext } from "react";
 import { useReducer } from "react";
 import { useEffect } from "react";
-import { getCategories, getVideos } from "../services/videosAPI";
+import { addItemToLikedVideosHandler, getCategories, getVideos } from "../services/videosAPI";
 
 const VideoContext = createContext();
 
 const initialState = {
     videos: [], 
     categories: [],
+    likedVideos: [],
 }
 
 const VideoProvider = ({children}) => {
@@ -23,6 +24,12 @@ const VideoProvider = ({children}) => {
                 return{
                     ...videoState,
                     categories: action.payload,
+                }
+
+            case "SET_LIKED_VIDEOS":
+                return{
+                    ...videoState,
+                    likedVideos: action.payload,
                 }
         }
     }
@@ -45,7 +52,7 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
     useEffect(() =>{
         const fetchAllCategories = async () =>{
             try{
-                const response = await getCategories();
+                const response = await getCategories(videos);
                 console.log("resp from category", response);
             videoDispatch({type: "SET_CATEGORIES", payload: response.categories});
             }catch(error){
@@ -55,7 +62,16 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
         fetchAllCategories();
     },[]);
 
-    return <VideoContext.Provider value={{videoState, videoDispatch}}>{children}</VideoContext.Provider>
+    const addItemToLikedVideos = async (video) =>{
+        try{
+            const response = await addItemToLikedVideosHandler(video);
+            videoDispatch({type: "SET_LIKED_VIDEOS", payload: response.likes})
+        }catch(error){
+            console.log(error)
+        }
+    }
+
+    return <VideoContext.Provider value={{videoState, videoDispatch, addItemToLikedVideos}}>{children}</VideoContext.Provider>
 }
 
 const useVideo = () => useContext(VideoContext);
