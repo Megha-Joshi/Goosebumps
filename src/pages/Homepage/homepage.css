@@ -26,6 +26,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    padding-bottom: 10px;
 }
 
 .card{
@@ -80,7 +81,7 @@
 
 .modal-cont{
      display: flex;
-     justify-content: end;
+     justify-content: flex-end;
      padding: 5px;
      background-color: var(--secondary-color);
 }
@@ -88,4 +89,9 @@
 .modal-list{
     color: var(--font-color);
     margin: 3px;
+}
+
+.page-head{
+    color: var(--font-color);
+    border-bottom: 1px solid var(--accent-color);
 }

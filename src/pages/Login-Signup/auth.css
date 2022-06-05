@@ -1,0 +1,86 @@
+/* Login.css */
+
+.check-pass {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--font-color);
+    margin: 10px;
+}
+
+/* Login-signup.css */
+
+.login-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.form-container {
+    width: 25%;
+    height: 53%;
+    padding: 1rem;
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+}
+
+.input-box {
+    width: 100%;
+    background-color: var(--secondary-color);
+    border: none;
+    outline: none;
+}
+
+.long-btn {
+    width: 91%;
+}
+
+.new-ac {
+    width: 100%;
+    text-align: center;
+}
+
+.login-head {
+    margin: 0.625rem 1.25rem 1.25rem 1.25rem;
+    text-align: center;
+    color: var(--font-color);
+}
+
+/* root.css */
+
+.justify-align {
+    justify-content: center;
+    align-items: center;
+}
+
+/* New */
+
+.inp-txt{
+    color: var(--font-color);
+}
+
+fieldset{
+    height: 35px;
+    border-radius: 5px;
+    text-align: start;
+    margin: 15px;
+}
+
+.text-btn{
+    background-color: transparent;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.login-btn{
+    background-color: #818A91;
+    color: var(--font-color);
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 15px;
+    font-size: 1rem;
+    cursor: pointer;
+}

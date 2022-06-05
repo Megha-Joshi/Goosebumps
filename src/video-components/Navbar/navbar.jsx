@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import "../../root.css";
 import "../Navbar/navbar.css";
 
@@ -13,7 +14,9 @@ return(
         }
         <h3>HAM</h3>
     </div>
+    <NavLink to="/login">
     <button className="nav-btn"><i class="fas fa-sign-in-alt fa-2x"></i></button>
+    </NavLink>
 </nav>
 )
 }
