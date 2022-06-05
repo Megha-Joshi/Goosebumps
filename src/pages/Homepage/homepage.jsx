@@ -26,9 +26,9 @@ return (
             <div className="card-cont">
 
                 {videos.map((video) => (
-                    
+
                     <article className="card">
-                    <img src="home-abandon.jpg" className="card-img" />
+                    <img src={video.thumbnail} className="card-img" />
                     <div className="card-head">
                         <h3 className="card-title">{video.title}</h3>
                         {modal ?
