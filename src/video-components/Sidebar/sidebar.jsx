@@ -22,7 +22,7 @@ return (
     <li className="nav-list"><span className="nav-icon"><i class="fas fa-history"></i></span>History</li>
     </NavLink>
     <NavLink to="/" className="text-link">
-    <li className="nav-list" onClick={logoutHandler}><span className="nav-icon"><i class="fas fa-compass"></i></span>Logout</li>
+    <li className="nav-list" onClick={logoutHandler}><span className="nav-icon"><i class="fas fa-sign-out-alt"></i></span>Logout</li>
     </NavLink>
   </ul>
 </aside>
