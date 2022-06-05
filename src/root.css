@@ -7,4 +7,10 @@
 
 body {
     background-color: var(--primary-color);
+    height: 100%;
+}
+
+.text-link{
+    color: var(--font-color);
+    text-decoration: none;
 }
