@@ -4,12 +4,14 @@ import { Sidebar } from "../../video-components/Sidebar/sidebar";
 import "../../root.css"
 import "../Homepage/homepage.css";
 import { useVideo } from "../../context/videoContext";
+import { useAuth } from "../../context/authContext";
 
 const Like = () => {
 const [sidebar, setSideBar] = useState(true);
 const [modal, setModal] = useState(false);
-const { videoState } = useVideo();
+const { videoState, removeItemFromLikedVideos } = useVideo();
 const { likedVideos } = videoState;
+const { token } = useAuth();
 return (
 <div className="App">
     <Navbar sidebar={sidebar} setSideBar={setSideBar} />
@@ -41,7 +43,7 @@ return (
                         <li className="modal-list"><span className="card-icon"><i
                                     class="fad fa-list"></i></span>Playlist
                         </li>
-                        <li className="modal-list"><span className="card-icon"><i
+                        <li className="modal-list" onClick={() => removeItemFromLikedVideos(likedVideo._id, token)}><span className="card-icon"><i
                                     class="fad fa-thumbs-up"></i></span>Liked
                             Videos</li>
                         <li className="modal-list"><span className="card-icon"><i class="fad fa-clock"></i></span>Watch

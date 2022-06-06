@@ -9,9 +9,15 @@ import { useAuth } from "../../context/authContext";
 const Homepage = () => {
 const [sidebar, setSideBar] = useState(true);
 const [modal, setModal] = useState(false);
-const { videoState, addItemToLikedVideos } = useVideo();
+const { videoState, addItemToLikedVideos, removeItemFromLikedVideos } = useVideo();
 const { videos, categories } = videoState;
 const { token } = useAuth();
+
+const likeHandler = (token, video) => {
+videoState.likedVideos.some((item) => item._id === video._id) ?
+removeItemFromLikedVideos(video._id, token) :
+addItemToLikedVideos(token,video)
+}
 
 return (
 <div className="App">
@@ -47,9 +53,10 @@ return (
                         <li className="modal-list"><span className="card-icon"><i
                                     class="fad fa-list"></i></span>Playlist
                         </li>
-                        <li className="modal-list" onClick={()=> addItemToLikedVideos(token,video)}><span
-                                className="card-icon"><i class="fad fa-thumbs-up"></i></span>Liked
-                            Videos</li>
+                        <li className="modal-list" onClick={()=> likeHandler(token,video)}><span
+                                className="card-icon"><i
+                                    class="fad fa-thumbs-up"></i></span>{videoState.likedVideos.some((item) => item._id
+                            === video._id)? "Remove Liked Video" : "Like Video"}</li>
                         <li className="modal-list"><span className="card-icon"><i class="fad fa-clock"></i></span>Watch
                             Later</li>
                     </ul>
