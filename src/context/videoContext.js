@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 import { useReducer } from "react";
 import { useEffect } from "react";
-import { addItemToWatchLaterVideosHandler, getCategories, getVideos } from "../services/videosAPI";
+import { addItemToWatchLaterVideosHandler, getCategories, getVideos, removeItemFromWatchLaterVideosHandler } from "../services/videosAPI";
 
 const VideoContext = createContext();
 
@@ -27,6 +27,11 @@ const VideoProvider = ({children}) => {
                 }
 
             case "SET_WATCH_LATER":
+                return{
+                    ...videoState,
+                    watchLater: action.payload,
+                }
+            case "REMOVE_WATCH_LATER":
                 return{
                     ...videoState,
                     watchLater: action.payload,
@@ -74,7 +79,16 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
         }
     }
 
-    return <VideoContext.Provider value={{videoState, videoDispatch, addItemToWatchLaterVideos}}>{children}</VideoContext.Provider>
+    const removeItemFromWatchLaterVideos = async (_id, token) => {
+        try{
+            const response = await removeItemFromWatchLaterVideosHandler(_id, token);
+            videoDispatch({type: "REMOVE_WATCH_LATER", payload: response.watchlater})
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+    return <VideoContext.Provider value={{videoState, videoDispatch, addItemToWatchLaterVideos, removeItemFromWatchLaterVideos}}>{children}</VideoContext.Provider>
 }
 
 const useVideo = () => useContext(VideoContext);

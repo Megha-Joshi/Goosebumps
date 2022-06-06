@@ -66,4 +66,21 @@ const addItemToWatchLaterVideosHandler = async (token,video) => {
     }
 }
 
-export { getVideos, getCategories, getWatchLaterVideosHandler, addItemToWatchLaterVideosHandler };
+const removeItemFromWatchLaterVideosHandler = async (_id, token) => {
+    try{
+        const response = await axios({
+            method: "DELETE",
+            url: `/api/user/watchlater/${_id}`,
+            headers: {
+                authorization : token
+            },
+        });
+
+        if(response.status === 200)
+            return response.data;
+    }catch(error){
+        console.error(error.response);
+    }
+}
+
+export { getVideos, getCategories, getWatchLaterVideosHandler, addItemToWatchLaterVideosHandler, removeItemFromWatchLaterVideosHandler };
