@@ -4,12 +4,15 @@ import { Sidebar } from "../../video-components/Sidebar/sidebar";
 import "../../root.css"
 import "../Homepage/homepage.css";
 import { useVideo } from "../../context/videoContext";
+import { useAuth } from "../../context/authContext";
 
 const Homepage = () => {
 const [sidebar, setSideBar] = useState(true);
 const [modal, setModal] = useState(false);
-const { videoState } = useVideo();
+const { videoState, addItemToWatchLaterVideos } = useVideo();
 const { videos, categories } = videoState;
+const { token } = useAuth();
+console.log(token);
 return (
 <div className="App">
     <Navbar sidebar={sidebar} setSideBar={setSideBar} />
@@ -47,7 +50,7 @@ return (
                         <li className="modal-list"><span className="card-icon"><i
                                     class="fad fa-thumbs-up"></i></span>Liked
                             Videos</li>
-                        <li className="modal-list"><span className="card-icon"><i class="fad fa-clock"></i></span>Watch
+                        <li className="modal-list" onClick={()=> addItemToWatchLaterVideos(token,video)}><span className="card-icon"><i class="fad fa-clock"></i></span>Watch
                             Later</li>
                     </ul>
                     :

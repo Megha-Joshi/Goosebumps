@@ -2,7 +2,6 @@ import axios from "axios";
 import { useAuth } from "../context/authContext";
 
 const getVideos = async () => {
-    const { token } = useAuth();
     try {
         const response = await axios({
             method: "GET",
@@ -32,29 +31,39 @@ const getCategories = async () =>{
 }
 
 const getWatchLaterVideosHandler = async () =>{
-    try {
-        const response = await axios ({
+    const { token } = useAuth();
+    try{
+        const response = await axios({
             method: "GET",
             url: "/api/user/watchlater",
             headers: {
                 authorization : token
-            }
+            },
         });
 
         if(response.status === 200)
+            return response.data;
+    }catch(error) {
+        console.error(error.response);
+    }
+}
+
+const addItemToWatchLaterVideosHandler = async (token,video) => {
+    try{
+        const response = await axios({
+            method: "POST",
+            url: "/api/user/watchlater",
+            data: {video},
+            headers: {
+                authorization : token
+            },
+        });
+
+        if(response.status === 200 || response.status === 201)
             return response.data;
     }catch(error){
         console.error(error.response);
     }
 }
 
-const addItemToWatchLaterVideos = async() =>{
-    try{
-        const response = await axios ({
-            method: "POST",
-            url: 
-        })
-    }
-}
-
-export { getVideos, getCategories, getWatchLaterVideosHandler };
+export { getVideos, getCategories, getWatchLaterVideosHandler, addItemToWatchLaterVideosHandler };
