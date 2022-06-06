@@ -1,8 +1,6 @@
 import axios from "axios";
 import { useAuth } from "../context/authContext";
 
-const { token } = useAuth();
-
 const getVideos = async () => {
     try {
         const response = await axios({
@@ -33,6 +31,7 @@ const getCategories = async () =>{
 }
 
 const getLikedVideosHandler = async () =>{
+    const { token } = useAuth();
     try{
         const response = await axios({
             method: "GET",
@@ -49,7 +48,7 @@ const getLikedVideosHandler = async () =>{
     }
 }
 
-const addItemToLikedVideosHandler = async (video) => {
+const addItemToLikedVideosHandler = async (token,video) => {
     try{
         const response = await axios({
             method: "POST",
@@ -60,7 +59,7 @@ const addItemToLikedVideosHandler = async (video) => {
             },
         });
 
-        if(response.status === 201)
+        if(response.status === 200 || response.status === 201)
             return response.data;
     }catch(error){
         console.error(error.response);
