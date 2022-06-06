@@ -12,7 +12,6 @@ const [modal, setModal] = useState(false);
 const { videoState, addItemToWatchLaterVideos, removeItemFromWatchLaterVideos } = useVideo();
 const { videos, categories } = videoState;
 const { token } = useAuth();
-console.log(token);
 
 const watchLaterHandler = ( token, video) => {
     videoState.watchLater.some((item) => item._id === video._id) ?

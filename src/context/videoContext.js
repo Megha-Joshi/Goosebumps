@@ -45,8 +45,7 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
         const fetchAllVideos = async () =>{
             try{
                 const response = await getVideos();
-                console.log("resp from video", response);
-            videoDispatch({type: "SET_VIDEOS", payload: response.videos});
+                videoDispatch({type: "SET_VIDEOS", payload: response.videos});
             }catch(error){
                 console.log(error);
             }
@@ -58,8 +57,7 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
         const fetchAllCategories = async () =>{
             try{
                 const response = await getCategories();
-                console.log("resp from category", response);
-            videoDispatch({type: "SET_CATEGORIES", payload: response.categories});
+                videoDispatch({type: "SET_CATEGORIES", payload: response.categories});
             }catch(error){
                 console.log(error);
             }
@@ -68,11 +66,9 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
     },[]);
 
     const addItemToWatchLaterVideos = async (token,video) => {
-        console.log("entered function", token,video);
         try{
             console.log("hello");
             const response = await addItemToWatchLaterVideosHandler(token,video);
-            console.log("response", response.watchlater);
             videoDispatch({type: "SET_WATCH_LATER",payload: response.watchlater});
         }catch(error){
             console.log(error);
