@@ -9,16 +9,14 @@ import { useAuth } from "../../context/authContext";
 const Homepage = () => {
 const [sidebar, setSideBar] = useState(true);
 const [modal, setModal] = useState(false);
-const { videoState, addItemToLikedVideos, removeItemFromLikedVideos } = useVideo();
+const { videoState, addItemToWatchLaterVideos, removeItemFromWatchLaterVideos } = useVideo();
 const { videos, categories } = videoState;
 const { token } = useAuth();
 
-const likeHandler = (token, video) => {
-videoState.likedVideos.some((item) => item._id === video._id) ?
-removeItemFromLikedVideos(video._id, token) :
-addItemToLikedVideos(token,video)
+const watchLaterHandler = ( token, video) => {
+    videoState.watchLater.some((item) => item._id === video._id) ?
+    removeItemFromWatchLaterVideos(video._id, token) : addItemToWatchLaterVideos(token,video)
 }
-
 return (
 <div className="App">
     <Navbar sidebar={sidebar} setSideBar={setSideBar} />
@@ -53,12 +51,10 @@ return (
                         <li className="modal-list"><span className="card-icon"><i
                                     class="fad fa-list"></i></span>Playlist
                         </li>
-                        <li className="modal-list" onClick={()=> likeHandler(token,video)}><span
-                                className="card-icon"><i
-                                    class="fad fa-thumbs-up"></i></span>{videoState.likedVideos.some((item) => item._id
-                            === video._id)? "Remove Liked Video" : "Like Video"}</li>
-                        <li className="modal-list"><span className="card-icon"><i class="fad fa-clock"></i></span>Watch
-                            Later</li>
+                        <li className="modal-list"><span className="card-icon"><i
+                                    class="fad fa-thumbs-up"></i></span>Liked
+                            Videos</li>
+                        <li className="modal-list" onClick={()=> watchLaterHandler(token,video)}><span className="card-icon"><i class="fad fa-clock"></i></span>{videoState.watchLater.some((item) => item._id === video._id) ? "Remove From Watch Later" : "Watch Later"}</li>
                     </ul>
                     :
                     null

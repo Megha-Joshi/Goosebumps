@@ -23,19 +23,18 @@ const getCategories = async () =>{
         });
     
         if (response.status === 200) {
-        console.log("category api response", response.data);
             return response.data;}
       } catch (error) {
         console.error(error.response);
       } 
 }
 
-const getLikedVideosHandler = async () =>{
+const getWatchLaterVideosHandler = async () =>{
     const { token } = useAuth();
     try{
         const response = await axios({
             method: "GET",
-            url: "/api/user/likes",
+            url: "/api/user/watchlater",
             headers: {
                 authorization : token
             },
@@ -48,11 +47,11 @@ const getLikedVideosHandler = async () =>{
     }
 }
 
-const addItemToLikedVideosHandler = async (token,video) => {
+const addItemToWatchLaterVideosHandler = async (token,video) => {
     try{
         const response = await axios({
             method: "POST",
-            url: "/api/user/likes",
+            url: "/api/user/watchlater",
             data: {video},
             headers: {
                 authorization : token
@@ -66,13 +65,13 @@ const addItemToLikedVideosHandler = async (token,video) => {
     }
 }
 
-const removeItemFromLikedVideosHandler = async (_id ,token) => {
+const removeItemFromWatchLaterVideosHandler = async (_id, token) => {
     try{
         const response = await axios({
             method: "DELETE",
-            url: `/api/user/likes/${_id}`,
-            headers:{
-                authorization: token
+            url: `/api/user/watchlater/${_id}`,
+            headers: {
+                authorization : token
             },
         });
 
@@ -82,4 +81,5 @@ const removeItemFromLikedVideosHandler = async (_id ,token) => {
         console.error(error.response);
     }
 }
-export { getVideos, getCategories, getLikedVideosHandler, addItemToLikedVideosHandler, removeItemFromLikedVideosHandler };
+
+export { getVideos, getCategories, getWatchLaterVideosHandler, addItemToWatchLaterVideosHandler, removeItemFromWatchLaterVideosHandler };

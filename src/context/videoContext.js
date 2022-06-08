@@ -1,15 +1,14 @@
 import { createContext, useContext } from "react";
 import { useReducer } from "react";
 import { useEffect } from "react";
-import { getCategories, getVideos, removeItemFromLikedVideosHandler } from "../services/videosAPI";
-import { addItemToLikedVideosHandler } from "../services/videosAPI";
+import { addItemToWatchLaterVideosHandler, getCategories, getVideos, removeItemFromWatchLaterVideosHandler } from "../services/videosAPI";
 
 const VideoContext = createContext();
 
 const initialState = {
     videos: [], 
     categories: [],
-    likedVideos: [],
+    watchLater: [],
 }
 
 const VideoProvider = ({children}) => {
@@ -27,17 +26,15 @@ const VideoProvider = ({children}) => {
                     categories: action.payload,
                 }
 
-            case "SET_LIKED_VIDEOS":
+            case "SET_WATCH_LATER":
                 return{
                     ...videoState,
-                    likedVideos: action.payload,
+                    watchLater: action.payload,
                 }
-
-            case "REMOVE_LIKES":
+            case "REMOVE_WATCH_LATER":
                 return{
                     ...videoState,
-                    likedVideos: action.payload,
-                }
+                    watchLater: action.payload,
         }
     }
 
@@ -47,7 +44,7 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
         const fetchAllVideos = async () =>{
             try{
                 const response = await getVideos();
-            videoDispatch({type: "SET_VIDEOS", payload: response.videos});
+                videoDispatch({type: "SET_VIDEOS", payload: response.videos});
             }catch(error){
                 console.log(error);
             }
@@ -59,7 +56,7 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
         const fetchAllCategories = async () =>{
             try{
                 const response = await getCategories();
-            videoDispatch({type: "SET_CATEGORIES", payload: response.categories});
+                videoDispatch({type: "SET_CATEGORIES", payload: response.categories});
             }catch(error){
                 console.log(error);
             }
@@ -67,25 +64,26 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
         fetchAllCategories();
     },[]);
 
-    const addItemToLikedVideos = async (token,video) =>{
+    const addItemToWatchLaterVideos = async (token,video) => {
         try{
-            const response = await addItemToLikedVideosHandler(token,video);
-            videoDispatch({type: "SET_LIKED_VIDEOS", payload: response.likes})
-        }catch(error){
-            console.log(error)
-        }
-    }
-
-    const removeItemFromLikedVideos = async(_id, token) =>{
-        try{
-            const response = await removeItemFromLikedVideosHandler(_id, token);
-            videoDispatch({type: "REMOVE_LIKES", payload: response.likes})
+            console.log("hello");
+            const response = await addItemToWatchLaterVideosHandler(token,video);
+            videoDispatch({type: "SET_WATCH_LATER",payload: response.watchlater});
         }catch(error){
             console.log(error);
         }
     }
 
-    return <VideoContext.Provider value={{videoState, videoDispatch , addItemToLikedVideos, removeItemFromLikedVideos }}>{children}</VideoContext.Provider>
+    const removeItemFromWatchLaterVideos = async (_id, token) => {
+        try{
+            const response = await removeItemFromWatchLaterVideosHandler(_id, token);
+            videoDispatch({type: "REMOVE_WATCH_LATER", payload: response.watchlater})
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+    return <VideoContext.Provider value={{videoState, videoDispatch, addItemToWatchLaterVideos, removeItemFromWatchLaterVideos}}>{children}</VideoContext.Provider>
 }
 
 const useVideo = () => useContext(VideoContext);
