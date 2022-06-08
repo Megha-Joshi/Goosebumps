@@ -19,11 +19,11 @@ return (
         {sidebar ?
         <Sidebar /> : null}
         <section className="right-cont">
-            
+
             <div className="chips-cont">
-            {categories.map((category) => (
+                {categories.map((category) => (
                 <div className="chips-item">{category.categoryName}</div>
-            ))}
+                ))}
             </div>
             <div className="card-cont">
 
@@ -46,11 +46,11 @@ return (
                         <li className="modal-list"><span className="card-icon"><i
                                     class="fad fa-list"></i></span>Playlist
                         </li>
-                        <li className="modal-list"><span className="card-icon"><i
-                                    class="fad fa-thumbs-up"></i></span>Liked
-                            Videos</li>
-                        <li className="modal-list"><span className="card-icon"><i class="fad fa-clock"></i></span>Watch
-                            Later</li>
+                        <li className="modal-list" onClick={()=> likeHandler(token,video)}><span
+                                className="card-icon"><i
+                                    class="fad fa-thumbs-up"></i></span>{videoState.likedVideos.some((item) => item._id
+                            === video._id)? "Remove Liked Video" : "Like Video"}</li>
+                        <li className="modal-list" onClick={()=> watchLaterHandler(token,video)}><span className="card-icon"><i class="fad fa-clock"></i></span>{videoState.watchLater.some((item) => item._id === video._id) ? "Remove From Watch Later" : "Watch Later"}</li>
                     </ul>
                     :
                     null

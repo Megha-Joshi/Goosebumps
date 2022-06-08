@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useAuth } from "../context/authContext";
 
 const getVideos = async () => {
     try {
@@ -22,7 +23,6 @@ const getCategories = async () =>{
         });
     
         if (response.status === 200) {
-        console.log("category api response", response.data);
             return response.data;}
       } catch (error) {
         console.error(error.response);
