@@ -35,7 +35,6 @@ const VideoProvider = ({children}) => {
                 return{
                     ...videoState,
                     watchLater: action.payload,
-                }
         }
     }
 

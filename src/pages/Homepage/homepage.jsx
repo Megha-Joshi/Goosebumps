@@ -24,17 +24,17 @@ return (
         {sidebar ?
         <Sidebar /> : null}
         <section className="right-cont">
-            
+
             <div className="chips-cont">
-            {categories.map((category) => (
+                {categories.map((category) => (
                 <div className="chips-item">{category.categoryName}</div>
-            ))}
+                ))}
             </div>
             <div className="card-cont">
 
                 {videos.map((video) => (
 
-                    <article className="card">
+                <article className="card">
                     <img src={video.thumbnail} className="card-img" />
                     <div className="card-head">
                         <h3 className="card-title">{video.title}</h3>
