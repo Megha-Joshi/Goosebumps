@@ -4,12 +4,14 @@ import { Sidebar } from "../../video-components/Sidebar/sidebar";
 import "../../root.css"
 import "../Homepage/homepage.css";
 import { useVideo } from "../../context/videoContext";
+import { useAuth } from "../../context/authContext";
 
 const Homepage = () => {
 const [sidebar, setSideBar] = useState(true);
 const [modal, setModal] = useState(false);
-const { videoState } = useVideo();
+const { videoState, addVideoToHistory } = useVideo();
 const { videos, categories } = videoState;
+const { token } = useAuth();
 return (
 <div className="App">
     <Navbar sidebar={sidebar} setSideBar={setSideBar} />
@@ -28,9 +30,9 @@ return (
                 {videos.map((video) => (
 
                     <article className="card">
-                    <img src={video.thumbnail} className="card-img" />
+                    <img src={video.thumbnail} className="card-img" onClick={() => addVideoToHistory(token, video)}/>
                     <div className="card-head">
-                        <h3 className="card-title">{video.title}</h3>
+                        <h3 className="card-title" onClick={() => addVideoToHistory(token, video)}>{video.title}</h3>
                         {modal ?
                         (<button className="card-icon" onClick={()=> setModal(false)}><i
                                 class="fad fa-door-open"></i></button>)
