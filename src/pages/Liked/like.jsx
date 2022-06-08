@@ -44,8 +44,8 @@ return (
                                     class="fad fa-list"></i></span>Playlist
                         </li>
                         <li className="modal-list" onClick={() => removeItemFromLikedVideos(likedVideo._id, token)}><span className="card-icon"><i
-                                    class="fad fa-thumbs-up"></i></span>Liked
-                            Videos</li>
+                                    class="fad fa-thumbs-up"></i></span>Remove Liked
+                            Video</li>
                         <li className="modal-list"><span className="card-icon"><i class="fad fa-clock"></i></span>Watch
                             Later</li>
                     </ul>
