@@ -1,6 +1,7 @@
 import { createContext, useContext } from "react";
 import { useReducer } from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { addVideoToHistoryHandler, clearHistoryHandler, getCategories, getVideos, removeVideoFromHistoryHandler, addItemToLikedVideosHandler, removeItemFromLikedVideosHandler, addItemToWatchLaterVideosHandler, removeItemFromWatchLaterVideosHandler } from "../services/videosAPI";
 
 const VideoContext = createContext();
@@ -14,6 +15,7 @@ const initialState = {
 }
 
 const VideoProvider = ({children}) => {
+    const navigate = useNavigate();
     const videoReducerFun = (videoState, action) => {
         switch(action.type){
             case "SET_VIDEOS":
@@ -99,12 +101,16 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
     },[]);
 
     const addItemToLikedVideos = async (token,video) =>{
-        try{
-            console.log("entered like page");
-            const response = await addItemToLikedVideosHandler(token,video);
-            videoDispatch({type: "SET_LIKED_VIDEOS", payload: response.likes})
-        }catch(error){
-            console.log(error);
+        if(token){
+            try{
+                console.log("entered like page");
+                const response = await addItemToLikedVideosHandler(token,video);
+                videoDispatch({type: "SET_LIKED_VIDEOS", payload: response.likes})
+            }catch(error){
+                console.log(error);
+            }
+        }else{
+            navigate("/login");
         }
     }
 
@@ -118,12 +124,16 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
     }
 
     const addItemToWatchLaterVideos = async (token,video) => {
-        try{
-            console.log("hello");
-            const response = await addItemToWatchLaterVideosHandler(token,video);
-            videoDispatch({type: "SET_WATCH_LATER",payload: response.watchlater});
-        }catch(error){
-            console.log(error);
+        if(token){
+            try{
+                console.log("hello");
+                const response = await addItemToWatchLaterVideosHandler(token,video);
+                videoDispatch({type: "SET_WATCH_LATER",payload: response.watchlater});
+            }catch(error){
+                console.log(error);
+            }
+        }else{
+            navigate("/login");
         }
     }
 
@@ -137,11 +147,15 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
     }
 
     const addVideoToHistory = async (token,video) =>{
-        try{
-            const response = await addVideoToHistoryHandler(token,video);
-            videoDispatch({type: "SET_HISTORY", payload: response.history})
-        }catch(error){
-            console.log(error)
+        if(token){
+            try{
+                const response = await addVideoToHistoryHandler(token,video);
+                videoDispatch({type: "SET_HISTORY", payload: response.history})
+            }catch(error){
+                console.log(error)
+            }
+        }else{
+            navigate("/login");
         }
     }
 
