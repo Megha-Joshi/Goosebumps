@@ -9,9 +9,22 @@ import { useAuth } from "../../context/authContext";
 const Homepage = () => {
 const [sidebar, setSideBar] = useState(true);
 const [modal, setModal] = useState(false);
-const { videoState, addVideoToHistory } = useVideo();
+const { videoState, addVideoToHistory, addItemToLikedVideos, removeItemFromLikedVideos, addItemToWatchLaterVideos,
+removeItemFromWatchLaterVideos } = useVideo();
 const { videos, categories } = videoState;
 const { token } = useAuth();
+
+const likeHandler = (token, video) => {
+videoState.likedVideos.some((item) => item._id === video._id) ?
+removeItemFromLikedVideos(video._id, token) :
+addItemToLikedVideos(token,video)
+}
+
+const watchLaterHandler = ( token, video) => {
+videoState.watchLater.some((item) => item._id === video._id) ?
+removeItemFromWatchLaterVideos(video._id, token) : addItemToWatchLaterVideos(token,video)
+}
+
 return (
 <div className="App">
     <Navbar sidebar={sidebar} setSideBar={setSideBar} />
@@ -29,10 +42,10 @@ return (
 
                 {videos.map((video) => (
 
-                    <article className="card">
-                    <img src={video.thumbnail} className="card-img" onClick={() => addVideoToHistory(token, video)}/>
+                <article className="card">
+                    <img src={video.thumbnail} className="card-img" onClick={()=> addVideoToHistory(token, video)}/>
                     <div className="card-head">
-                        <h3 className="card-title" onClick={() => addVideoToHistory(token, video)}>{video.title}</h3>
+                        <h3 className="card-title" onClick={()=> addVideoToHistory(token, video)}>{video.title}</h3>
                         {modal ?
                         (<button className="card-icon" onClick={()=> setModal(false)}><i
                                 class="fad fa-door-open"></i></button>)
@@ -50,7 +63,10 @@ return (
                                 className="card-icon"><i
                                     class="fad fa-thumbs-up"></i></span>{videoState.likedVideos.some((item) => item._id
                             === video._id)? "Remove Liked Video" : "Like Video"}</li>
-                        <li className="modal-list" onClick={()=> watchLaterHandler(token,video)}><span className="card-icon"><i class="fad fa-clock"></i></span>{videoState.watchLater.some((item) => item._id === video._id) ? "Remove From Watch Later" : "Watch Later"}</li>
+                        <li className="modal-list" onClick={()=> watchLaterHandler(token,video)}><span
+                                className="card-icon"><i
+                                    class="fad fa-clock"></i></span>{videoState.watchLater.some((item) => item._id ===
+                            video._id) ? "Remove From Watch Later" : "Watch Later"}</li>
                     </ul>
                     :
                     null

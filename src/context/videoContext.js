@@ -1,13 +1,15 @@
 import { createContext, useContext } from "react";
 import { useReducer } from "react";
 import { useEffect } from "react";
-import { addVideoToHistoryHandler, clearHistoryHandler, getCategories, getVideos, removeVideoFromHistoryHandler } from "../services/videosAPI";
+import { addVideoToHistoryHandler, clearHistoryHandler, getCategories, getVideos, removeVideoFromHistoryHandler, addItemToLikedVideosHandler, removeItemFromLikedVideosHandler, addItemToWatchLaterVideosHandler, removeItemFromWatchLaterVideosHandler } from "../services/videosAPI";
 
 const VideoContext = createContext();
 
 const initialState = {
     videos: [], 
     categories: [],
+    likedVideos: [],
+    watchLater: [],
     history: [],
 }
 
@@ -25,11 +27,35 @@ const VideoProvider = ({children}) => {
                     ...videoState,
                     categories: action.payload,
                 }
+
+            case "SET_LIKED_VIDEOS":
+                return{
+                        ...videoState,
+                        likedVideos: action.payload,
+                }
+    
+            case "REMOVE_LIKES":
+                return{
+                        ...videoState,
+                        likedVideos: action.payload,
+                }
             
+            case "SET_WATCH_LATER":
+                return{
+                        ...videoState,
+                        watchLater: action.payload,
+                }
+
+            case "REMOVE_WATCH_LATER":
+                return{
+                        ...videoState,
+                        watchLater: action.payload,
+                }
+
             case "SET_HISTORY":
                 return{
-                    ...videoState,
-                    history: action.payload,
+                        ...videoState,
+                        history: action.payload,
                 }
 
             case "REMOVE_FROM_HISTORY":
@@ -45,7 +71,6 @@ const VideoProvider = ({children}) => {
                 }
         }
     }
-}
 
 const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
 
@@ -72,6 +97,44 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
         }
         fetchAllCategories();
     },[]);
+
+    const addItemToLikedVideos = async (token,video) =>{
+        try{
+            console.log("entered like page");
+            const response = await addItemToLikedVideosHandler(token,video);
+            videoDispatch({type: "SET_LIKED_VIDEOS", payload: response.likes})
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+    const removeItemFromLikedVideos = async(_id, token) =>{
+        try{
+            const response = await removeItemFromLikedVideosHandler(_id, token);
+            videoDispatch({type: "REMOVE_LIKES", payload: response.likes})
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+    const addItemToWatchLaterVideos = async (token,video) => {
+        try{
+            console.log("hello");
+            const response = await addItemToWatchLaterVideosHandler(token,video);
+            videoDispatch({type: "SET_WATCH_LATER",payload: response.watchlater});
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+    const removeItemFromWatchLaterVideos = async (_id, token) => {
+        try{
+            const response = await removeItemFromWatchLaterVideosHandler(_id, token);
+            videoDispatch({type: "REMOVE_WATCH_LATER", payload: response.watchlater})
+        }catch(error){
+            console.log(error);
+        }
+    }
 
     const addVideoToHistory = async (token,video) =>{
         try{
@@ -100,7 +163,7 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
         }
     }
 
-    return <VideoContext.Provider value={{videoState, videoDispatch, addVideoToHistory, removeVideoFromHistory, clearHistory}}>{children}</VideoContext.Provider>
+    return <VideoContext.Provider value={{videoState, videoDispatch, addItemToLikedVideos, removeItemFromLikedVideos, addItemToWatchLaterVideos, removeItemFromWatchLaterVideos,addVideoToHistory, removeVideoFromHistory, clearHistory}}>{children}</VideoContext.Provider>
 }
 
 
