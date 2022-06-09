@@ -1,0 +1,41 @@
+.video-cont{
+    padding: 15px;
+}
+
+.video-creator{
+    text-align: start;
+    padding: 1px 5px 5px 6px;
+    /* margin: 0px 5px 5px 5px 5px; */
+    color: var(--primary-color);
+}
+
+.video-title{
+    color: var(--font-color);
+    text-align: start;
+    padding: 5px;
+    margin: 4px;
+    cursor: pointer;
+    margin-bottom: 0px;
+}
+
+.video-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.video-icons{
+    display: flex;
+    gap: 10px;
+}
+
+.video-footer{
+    display: flex;
+}
+
+.video-txt{
+    color: var(--font-color);
+    text-align: start;
+    padding: 5px;
+    margin: 4px;
+}

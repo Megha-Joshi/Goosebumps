@@ -43,41 +43,29 @@ return (
 
                 {videos.map((video) => (
                 <article className="card">
-                    <NavLink to={`/homepage/${video._id}`}> 
-                    <img src={video.thumbnail} className="card-img" onClick={()=> addVideoToHistory(token, video)}/>
+                    <NavLink to={`/homepage/${video._id}`}> <img src={video.thumbnail} className="card-img"
+                        onClick={()=> addVideoToHistory(token, video)}/>
                     </NavLink>
-                    <div className="card-head">
-                        <h3 className="card-title" onClick={()=> addVideoToHistory(token, video)}>{video.title}</h3>
-                        {modal ?
-                        (<button className="card-icon" onClick={()=> setModal(false)}><i
-                                class="fad fa-door-open"></i></button>)
-                        :
-                        (<button className="card-icon" onClick={()=> setModal(true)}><i
-                                class="fad fa-door-closed"></i></button>)
-                        }
-                    </div>
-                    {modal?
-                    <ul className="modal-cont">
-                        <li className="modal-list"><span className="card-icon"><i
-                                    class="fad fa-list"></i></span>Playlist
-                        </li>
-                        <li className="modal-list" onClick={()=> likeHandler(token,video)}><span
-                                className="card-icon"><i
-                                    class="fad fa-thumbs-up"></i></span>{videoState.likedVideos.some((item) => item._id
-                            === video._id)? "Remove Liked Video" : "Like Video"}</li>
-                        <li className="modal-list" onClick={()=> watchLaterHandler(token,video)}><span
-                                className="card-icon"><i class="fad fa-clock"></i></span>{videoState.watchLater.some((item) => item._id === video._id) ? "Remove From Watch Later" : "Watch Later"}</li>
-                    </ul>
-                    :
-                    null
-                    }
-                    <p className="card-content">{video.creator}</p>
+                    <h3 className="card-title" onClick={()=> addVideoToHistory(token, video)}>{video.title}</h3>
+                    <p className="card-subhead"><i>By {video.creator}</i></p>
                     <div className="card-footer">
                         <p className="card-content">{video.views}</p>
                         <p className="card-content">{video.date}</p>
+                        <li className="modal-list"><span className="card-icon"><i
+                                    class="fad fa-list"></i></span>
+                        </li>
+                        <li className="modal-list" onClick={()=> likeHandler(token,video)}><span
+                                className="card-icon"><i className={videoState.likedVideos.some((item)=> item._id
+                                    === video._id) ? "fas fa-thumbs-up" : "far fa-thumbs-up"}
+                                    ></i></span>
+                        </li>
+                        <li className="modal-list" onClick={()=> watchLaterHandler(token,video)}><span
+                                className="card-icon"><i className={videoState.watchLater.some((item)=> item._id ===
+                                    video._id)? "fas fa-clock" : "far fa-clock" }></i></span>
+                        </li>
                     </div>
 
-                    </article>
+                </article>
                 ))}
             </div>
         </section>
