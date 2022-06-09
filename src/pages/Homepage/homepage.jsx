@@ -5,6 +5,7 @@ import "../../root.css"
 import "../Homepage/homepage.css";
 import { useVideo } from "../../context/videoContext";
 import { useAuth } from "../../context/authContext";
+import { Link, NavLink } from "react-router-dom";
 
 const Homepage = () => {
 const [sidebar, setSideBar] = useState(true);
@@ -41,9 +42,10 @@ return (
             <div className="card-cont">
 
                 {videos.map((video) => (
-
                 <article className="card">
+                    <NavLink to={`/homepage/${video._id}`}> 
                     <img src={video.thumbnail} className="card-img" onClick={()=> addVideoToHistory(token, video)}/>
+                    </NavLink>
                     <div className="card-head">
                         <h3 className="card-title" onClick={()=> addVideoToHistory(token, video)}>{video.title}</h3>
                         {modal ?
@@ -64,9 +66,7 @@ return (
                                     class="fad fa-thumbs-up"></i></span>{videoState.likedVideos.some((item) => item._id
                             === video._id)? "Remove Liked Video" : "Like Video"}</li>
                         <li className="modal-list" onClick={()=> watchLaterHandler(token,video)}><span
-                                className="card-icon"><i
-                                    class="fad fa-clock"></i></span>{videoState.watchLater.some((item) => item._id ===
-                            video._id) ? "Remove From Watch Later" : "Watch Later"}</li>
+                                className="card-icon"><i class="fad fa-clock"></i></span>{videoState.watchLater.some((item) => item._id === video._id) ? "Remove From Watch Later" : "Watch Later"}</li>
                     </ul>
                     :
                     null
@@ -77,7 +77,7 @@ return (
                         <p className="card-content">{video.date}</p>
                     </div>
 
-                </article>
+                    </article>
                 ))}
             </div>
         </section>
