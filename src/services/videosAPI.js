@@ -29,12 +29,12 @@ const getCategories = async () =>{
       } 
 }
 
-const getLikedVideosHandler = async () =>{
+const getHistoryVideosHandler = async () =>{
     const { token } = useAuth();
     try{
         const response = await axios({
             method: "GET",
-            url: "/api/user/likes",
+            url: "/api/user/history",
             headers: {
                 authorization : token
             },
@@ -47,11 +47,11 @@ const getLikedVideosHandler = async () =>{
     }
 }
 
-const addItemToLikedVideosHandler = async (token,video) => {
+const addVideoToHistoryHandler = async (token,video) => {
     try{
         const response = await axios({
             method: "POST",
-            url: "/api/user/likes",
+            url: "/api/user/history",
             data: {video},
             headers: {
                 authorization : token
@@ -65,11 +65,11 @@ const addItemToLikedVideosHandler = async (token,video) => {
     }
 }
 
-const removeItemFromLikedVideosHandler = async (_id ,token) => {
+const removeVideoFromHistoryHandler = async (_id ,token) => {
     try{
         const response = await axios({
             method: "DELETE",
-            url: `/api/user/likes/${_id}`,
+            url: `/api/user/history/${_id}`,
             headers:{
                 authorization: token
             },
@@ -82,47 +82,11 @@ const removeItemFromLikedVideosHandler = async (_id ,token) => {
     }
 }
 
-const getWatchLaterVideosHandler = async () =>{
-    const { token } = useAuth();
-    try{
-        const response = await axios({
-            method: "GET",
-            url: "/api/user/watchlater",
-            headers: {
-                authorization : token
-            },
-        });
-
-        if(response.status === 200)
-            return response.data;
-    }catch(error) {
-        console.error(error.response);
-    }
-}
-
-const addItemToWatchLaterVideosHandler = async (token,video) => {
-    try{
-        const response = await axios({
-            method: "POST",
-            url: "/api/user/watchlater",
-            data: {video},
-            headers: {
-                authorization : token
-            },
-        });
-
-        if(response.status === 200 || response.status === 201)
-            return response.data;
-    }catch(error){
-        console.error(error.response);
-    }
-}
-
-const removeItemFromWatchLaterVideosHandler = async (_id, token) => {
+const clearHistoryHandler = async (token) => {
     try{
         const response = await axios({
             method: "DELETE",
-            url: `/api/user/watchlater/${_id}`,
+            url: "/api/user/history/all",
             headers: {
                 authorization : token
             },
@@ -135,4 +99,4 @@ const removeItemFromWatchLaterVideosHandler = async (_id, token) => {
     }
 }
 
-export { getVideos, getCategories, getWatchLaterVideosHandler, addItemToWatchLaterVideosHandler, removeItemFromWatchLaterVideosHandler, getLikedVideosHandler, addItemToLikedVideosHandler, removeItemFromLikedVideosHandler };
+export { getVideos, getCategories, getHistoryVideosHandler, addVideoToHistoryHandler, removeVideoFromHistoryHandler, clearHistoryHandler };

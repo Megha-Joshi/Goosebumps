@@ -41,6 +41,7 @@
     width: 20rem;
     height: 12rem;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .card-head{
@@ -54,6 +55,7 @@
     text-align: start;
     padding: 5px;
     margin: 5px;
+    cursor: pointer;
 }
 
 .card-content{

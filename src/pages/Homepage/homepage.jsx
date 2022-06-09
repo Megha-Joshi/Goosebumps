@@ -9,21 +9,9 @@ import { useAuth } from "../../context/authContext";
 const Homepage = () => {
 const [sidebar, setSideBar] = useState(true);
 const [modal, setModal] = useState(false);
-const { videoState, addItemToWatchLaterVideos, removeItemFromWatchLaterVideos, addItemToLikedVideos, removeItemFromLikedVideos } = useVideo();
+const { videoState, addVideoToHistory } = useVideo();
 const { videos, categories } = videoState;
 const { token } = useAuth();
-
-const watchLaterHandler = ( token, video) => {
-    videoState.watchLater.some((item) => item._id === video._id) ?
-    removeItemFromWatchLaterVideos(video._id, token) : addItemToWatchLaterVideos(token,video)
-}
-
-const likeHandler = (token, video) => {
-    videoState.likedVideos.some((item) => item._id === video._id) ?
-    removeItemFromLikedVideos(video._id, token) :
-    addItemToLikedVideos(token,video)
-    }
-
 return (
 <div className="App">
     <Navbar sidebar={sidebar} setSideBar={setSideBar} />
@@ -41,10 +29,10 @@ return (
 
                 {videos.map((video) => (
 
-                <article className="card">
-                    <img src={video.thumbnail} className="card-img" />
+                    <article className="card">
+                    <img src={video.thumbnail} className="card-img" onClick={() => addVideoToHistory(token, video)}/>
                     <div className="card-head">
-                        <h3 className="card-title">{video.title}</h3>
+                        <h3 className="card-title" onClick={() => addVideoToHistory(token, video)}>{video.title}</h3>
                         {modal ?
                         (<button className="card-icon" onClick={()=> setModal(false)}><i
                                 class="fad fa-door-open"></i></button>)
