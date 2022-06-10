@@ -5,7 +5,7 @@ import "../../root.css"
 import "../Homepage/homepage.css";
 import { useVideo } from "../../context/videoContext";
 import { useAuth } from "../../context/authContext";
-import { Link, NavLink } from "react-router-dom";
+import { useFilter } from "../../context/filterContext";
 
 const Homepage = () => {
 const [sidebar, setSideBar] = useState(true);
@@ -14,6 +14,7 @@ const { videoState, addVideoToHistory, addItemToLikedVideos, removeItemFromLiked
 removeItemFromWatchLaterVideos } = useVideo();
 const { videos, categories } = videoState;
 const { token } = useAuth();
+const { filterState, filterDispatch, filteredVideos } = useFilter();
 
 const likeHandler = (token, video) => {
 videoState.likedVideos.some((item) => item._id === video._id) ?
@@ -36,12 +37,12 @@ return (
 
             <div className="chips-cont">
                 {categories.map((category) => (
-                <div className="chips-item">{category.categoryName}</div>
+                <div className="chips-item" onClick={()=> filterDispatch({type: "CATEGORY", payload: category.categoryName})}>{category.categoryName}</div>
                 ))}
+                <div className="chips-item" onClick={()=> filterDispatch ({type: "CLEAR_FILTER", payload: {...filterState.allVideos}})}>CLEAR ALL</div>
             </div>
             <div className="card-cont">
-
-                {videos.map((video) => (
+                {filteredVideos(videos, filterState).map((video) => (
                 <article className="card">
                     <NavLink to={`/homepage/${video._id}`}> <img src={video.thumbnail} className="card-img"
                         onClick={()=> addVideoToHistory(token, video)}/>
