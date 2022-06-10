@@ -8,7 +8,6 @@ import { useAuth } from "../../context/authContext";
 
 const Like = () => {
 const [sidebar, setSideBar] = useState(true);
-const [modal, setModal] = useState(false);
 const { videoState, removeItemFromLikedVideos, addItemToWatchLaterVideos, removeItemFromWatchLaterVideos } = useVideo();
 const { likedVideos } = videoState;
 const { token } = useAuth();

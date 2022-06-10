@@ -6,10 +6,10 @@ import "../Homepage/homepage.css";
 import { useVideo } from "../../context/videoContext";
 import { useAuth } from "../../context/authContext";
 import { useFilter } from "../../context/filterContext";
+import { NavLink } from "react-router-dom";
 
 const Homepage = () => {
 const [sidebar, setSideBar] = useState(true);
-const [modal, setModal] = useState(false);
 const { videoState, addVideoToHistory, addItemToLikedVideos, removeItemFromLikedVideos, addItemToWatchLaterVideos,
 removeItemFromWatchLaterVideos } = useVideo();
 const { videos, categories } = videoState;

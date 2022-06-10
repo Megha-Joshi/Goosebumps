@@ -12,7 +12,7 @@ return(
         (<button className="nav-btn" onClick={()=> setSideBar(true)}><i
                 class="fas fa-skull-crossbones fa-2x"></i></button>)
         }
-        <h3>HAM</h3>
+        <h3>SHADOW</h3>
     </div>
     <NavLink to="/login">
     <button className="nav-btn"><i class="fas fa-sign-in-alt fa-2x"></i></button>
