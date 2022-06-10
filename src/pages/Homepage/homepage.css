@@ -45,25 +45,34 @@
     cursor: pointer;
 }
 
-.card-head{
+/* .card-head{
     display: flex;
     justify-content: space-between;
     margin-right: 5px;
-}
+} */
 
 .card-title{
     color: var(--font-color);
     text-align: start;
     padding: 5px;
-    margin: 5px;
+    margin: 5px 5px 0px 5px;
     cursor: pointer;
+    text-decoration: underline;
+}
+
+.card-subhead{
+    color: var(--font-color);
+    text-align: start;
+    padding: 5px;
+    margin: 2px;
 }
 
 .card-content{
     color: var(--font-color);
     text-align: start;
     padding: 5px;
-    margin: 5px;
+    margin: 5px 5px 5px 0px;
+    font-size: small;
 }
 
 .card-footer{

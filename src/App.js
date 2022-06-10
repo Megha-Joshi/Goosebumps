@@ -9,6 +9,7 @@ import { Like } from "./pages/Liked/like";
 import { History } from "./pages/History/history";
 import { WatchLater } from "./pages/WatchLater/watchLater";
 import { PrivateRoute } from "./video-components/privateRoute/privateRoute.jsx" 
+import { Stream } from "./pages/Stream/stream";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<Landingpage />} />
         <Route path="/homepage" element={<Homepage />}/>
+        <Route path="/homepage/:videoID" element={<Stream />} />
         <Route path="/login" element={<Login />}/>
         <Route path="/signup" element={<Signup />}/>
 
