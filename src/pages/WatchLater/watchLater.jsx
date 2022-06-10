@@ -9,9 +9,15 @@ import { useAuth } from "../../context/authContext";
 const WatchLater = () => {
 const [sidebar, setSideBar] = useState(true);
 const [modal, setModal] = useState(false);
-const { videoState, removeItemFromWatchLaterVideos } = useVideo();
+const { videoState, removeItemFromWatchLaterVideos, addItemToLikedVideos, removeItemFromLikedVideos } = useVideo();
 const { watchLater } = videoState;
 const { token } = useAuth();
+
+const likeHandler = (token, video) => {
+    videoState.likedVideos.some((item) => item._id === video._id) ?
+    removeItemFromLikedVideos(video._id, token) :
+    addItemToLikedVideos(token,video)
+    }
 return (
 <div className="App">
     <Navbar sidebar={sidebar} setSideBar={setSideBar} />
@@ -27,36 +33,21 @@ return (
                 {watchLater.map((watchLaterVideo) => (
                     <article className="card">
                     <img src={watchLaterVideo.thumbnail} className="card-img" />
-                    <div className="card-head">
                         <h3 className="card-title">{watchLaterVideo.title}</h3>
-                        {modal ?
-                        (<button className="card-icon" onClick={()=> setModal(false)}><i
-                                class="fad fa-door-open"></i></button>)
-                        :
-                        (<button className="card-icon" onClick={()=> setModal(true)}><i
-                                class="fad fa-door-closed"></i></button>)
-                        }
-                    </div>
-                    {modal?
-                    <ul className="modal-cont">
-                        <li className="modal-list"><span className="card-icon"><i
-                                    class="fad fa-list"></i></span>Playlist
-                        </li>
-                        <li className="modal-list"><span className="card-icon"><i
-                                    class="fad fa-thumbs-up"></i></span>Liked
-                            Videos</li>
-                        <li className="modal-list" onClick={() => removeItemFromWatchLaterVideos(watchLaterVideo._id, token)}><span className="card-icon"><i class="fad fa-clock"></i></span>Remove Watch
-                            Later</li>
-                    </ul>
-                    :
-                    null
-                    }
-                    <p className="card-content">{watchLaterVideo.creator}</p>
+                    <p className="card-subhead"><i>{watchLaterVideo.creator}</i></p>
                     <div className="card-footer">
                         <p className="card-content">{watchLaterVideo.views}</p>
                         <p className="card-content">{watchLaterVideo.date}</p>
+                        <li className="modal-list"><span className="card-icon"><i
+                                    class="fad fa-list"></i></span>
+                        </li>
+                         <li className="modal-list" onClick={()=> likeHandler(token,watchLaterVideo)}><span
+                                className="card-icon"><i className={videoState.likedVideos.some((item)=> item._id
+                                    === watchLaterVideo._id) ? "fas fa-thumbs-up" : "far fa-thumbs-up"}
+                                    ></i></span>
+                        </li>
+                        <li className="modal-list" onClick={() => removeItemFromWatchLaterVideos(watchLaterVideo._id, token)}><span className="card-icon"><i class="fas fa-clock"></i></span></li>
                     </div>
-
                 </article>
                 ))}
             </div>
