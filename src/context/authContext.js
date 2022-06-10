@@ -48,22 +48,6 @@ const AuthProvider = ({children}) => {
         }
     }
 
-    // const signupHandler = async(user) => {
-    //     try{
-    //         const response = await signupAPI(user);
-    //         if(response.status === 201){
-    //             localStorage.setItem("token", response.data.encodedToken);
-    //             localStorage.setItem("user", JSON.stringify(response.data.createdUser));
-    //             setToken(response.data.encodedToken);
-    //             setUser(response.data.createdUser);
-
-    //             navigate("/homepage")
-    //         }
-    //     }catch(error){
-    //         console.log(error);
-    //     }
-    // }
-
     const logoutHandler = () =>{
         navigate("/");
         localStorage.removeItem("token");
