@@ -136,7 +136,7 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
                 console.log(error);
             }
         }else{
-            toast.error("First Login");
+            toast.error("Login First!");
             navigate("/login");
         }
     }
@@ -164,7 +164,7 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
                 console.log(error);
             }
         }else{
-            toast.error("First Login");
+            toast.error("Login First!");
             navigate("/login");
         }
     }
@@ -189,7 +189,7 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
                 console.log(error)
             }
         }else{
-            toast.error("First Login");
+            toast.error("Login First!");
             navigate("/login");
         }
     }
@@ -221,10 +221,13 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
             try{
                 const response = await addNewPlaylistHandler(token, playlistName);
                 videoDispatch({type: "ADD_PLAYLIST", payload: response.playlists})
+                toast.success("New Playlist Created");
             }catch(error){
+                toast.error("Cannot create new Playlist");
                 console.log(error)
             }
         }else{
+            toast.error("Login First!");
             navigate("/login");
         }
     }
@@ -233,7 +236,9 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
         try{
             const response = await removePlaylistHandler(token, playlistID);
             videoDispatch({type: "DELETE_PLAYLIST", payload: response.playlists})
+            toast.success("Playlist removed");
         }catch(error){
+            toast.error("Cannot remove playlist");
             console.log(error);
         }
     }
@@ -243,10 +248,13 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
             try{
                 const response = await addVideoToPlaylistHandler(token, currvideo, playlistID);
                 videoDispatch({type: "ADD_VIDEO_TO_PLAYLIST", payload: response.playlist})
+                toast.success("Video added to playlist");
             }catch(error){
+                toast.error("Cannot add video to playlist");
                 console.log(error)
             }
         }else{
+            toast.error("Login First!");
             navigate("/login");
         }
     }
@@ -255,16 +263,15 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
         try{
             const response = await removeVideoFromPlaylistHandler(token, videoID, playlistID);
             videoDispatch({type: "ADD_VIDEO_TO_PLAYLIST", payload: response.playlist})
+            toast.success("Video removed from playlist");
         }catch(error){
+            toast.error("Cannot remove video from playlist");
             console.log(error);
         }
     }
 
-
-
     return <VideoContext.Provider value={{videoState, videoDispatch, addItemToLikedVideos, removeItemFromLikedVideos, addItemToWatchLaterVideos, removeItemFromWatchLaterVideos,addVideoToHistory, removeVideoFromHistory, clearHistory, addNewPlaylist, removePlaylist, addVideoToPlaylist, removeVideoFromPlaylist}}>{children}</VideoContext.Provider>
 }
-
 
 const useVideo = () => useContext(VideoContext);
 
