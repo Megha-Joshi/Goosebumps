@@ -1,5 +1,5 @@
 import "./App.css";
-import logo from "./logo.png";
+import { Toaster } from 'react-hot-toast';
 import { Homepage } from "./pages/Homepage/homepage";
 import { Landingpage } from "./pages/Landingpage/landingpage";
 import { Login } from "./pages/Login-Signup/login";
@@ -15,6 +15,7 @@ import { Stream } from "./pages/Stream/stream";
 function App() {
   return (
     <div className="App">
+      <Toaster />
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Landingpage />} />
