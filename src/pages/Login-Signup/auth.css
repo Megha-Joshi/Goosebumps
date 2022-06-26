@@ -74,8 +74,12 @@ fieldset{
     cursor: pointer;
 }
 
+.text-btn:hover{
+    text-decoration: underline;
+}
+
 .login-btn{
-    background-color: #818A91;
+    background-color: var(--btn-hover-color);
     color: var(--font-color);
     border: none;
     padding: 10px;
@@ -83,4 +87,8 @@ fieldset{
     margin: 15px;
     font-size: 1rem;
     cursor: pointer;
+}
+
+.login-btn:hover{
+    background-color: var(--primary-color);
 }
