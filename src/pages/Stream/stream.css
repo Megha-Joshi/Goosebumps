@@ -1,11 +1,10 @@
 .video-cont{
-    padding: 15px;
+    padding: 0.938rem;
 }
 
 .video-creator{
     text-align: start;
     padding: 1px 5px 5px 6px;
-    /* margin: 0px 5px 5px 5px 5px; */
     color: var(--primary-color);
 }
 

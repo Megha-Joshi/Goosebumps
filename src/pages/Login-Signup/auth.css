@@ -60,10 +60,10 @@
 }
 
 fieldset{
-    height: 35px;
+    height: 2.188rem;
     border-radius: 5px;
     text-align: start;
-    margin: 15px;
+    margin: 0.938rem;
 }
 
 .text-btn{
@@ -84,7 +84,7 @@ fieldset{
     border: none;
     padding: 10px;
     border-radius: 5px;
-    margin: 15px;
+    margin: 0.938rem;
     font-size: 1rem;
     cursor: pointer;
 }
