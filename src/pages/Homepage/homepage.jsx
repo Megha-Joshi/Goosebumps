@@ -65,6 +65,7 @@ return (
                                     video._id)? "fas fa-clock" : "far fa-clock" }></i></span>
                         </li>
                     </div>
+
                 </article>
                 ))}
             </div>
