@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 import { createContext, useContext } from "react";
 import { useReducer } from "react";
 import { useEffect } from "react";
@@ -129,10 +130,13 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
                 console.log("entered like page");
                 const response = await addItemToLikedVideosHandler(token,video);
                 videoDispatch({type: "SET_LIKED_VIDEOS", payload: response.likes})
+                toast.success("Added to liked videos");
             }catch(error){
+                toast.error("Cannot add to liked videos");
                 console.log(error);
             }
         }else{
+            toast.error("First Login");
             navigate("/login");
         }
     }
@@ -141,7 +145,9 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
         try{
             const response = await removeItemFromLikedVideosHandler(_id, token);
             videoDispatch({type: "REMOVE_LIKES", payload: response.likes})
+            toast.success("Removed from liked videos")
         }catch(error){
+            toast.error("Cannot remove from liked videos");
             console.log(error);
         }
     }
@@ -152,10 +158,13 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
                 console.log("hello");
                 const response = await addItemToWatchLaterVideosHandler(token,video);
                 videoDispatch({type: "SET_WATCH_LATER",payload: response.watchlater});
+                toast.success("Added to watch later");
             }catch(error){
+                toast.error("Cannot add to watch later");
                 console.log(error);
             }
         }else{
+            toast.error("First Login");
             navigate("/login");
         }
     }
@@ -164,7 +173,9 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
         try{
             const response = await removeItemFromWatchLaterVideosHandler(_id, token);
             videoDispatch({type: "REMOVE_WATCH_LATER", payload: response.watchlater})
+            toast.success("Removed from watch later");
         }catch(error){
+            toast.error("Cannot remove from watch later");
             console.log(error);
         }
     }
@@ -178,6 +189,7 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
                 console.log(error)
             }
         }else{
+            toast.error("First Login");
             navigate("/login");
         }
     }
@@ -186,7 +198,9 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
         try{
             const response = await removeVideoFromHistoryHandler(_id, token);
             videoDispatch({type: "REMOVE_FROM_HISTORY", payload: response.history})
+            toast.success("Removed from history");
         }catch(error){
+            toast.error("Cannot remove from history");
             console.log(error);
         }
     }
@@ -195,7 +209,9 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
         try{
             const response = await clearHistoryHandler(token);
             videoDispatch({type: "CLEAR_ALL_HISTORY", payload: response.history})
+            toast.success("All Clear");
         }catch(error){
+            toast.error("Cannot clear history");
             console.log(error)
         }
     }

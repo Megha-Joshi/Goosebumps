@@ -7,12 +7,12 @@
 <h3 align="center">Shadow is a video library, which offers you the mysterious, abondoned and haunted videos of different continents.</h3>
 
 <p align="center">
-  <a href="https://note-cave.netlify.app/">Check Out the Website</a>
+  <a href="https://hidden-shadow.netlify.app/">Check Out the Website</a>
 <br />
 
 ##  _How To Use_
 
-Explore [ Shadow ](https://note-cave.netlify.app/) and enjoy the videos.
+Explore [ Shadow ](https://hidden-shadow.netlify.app/) and enjoy the videos.
 
 <br />
 
