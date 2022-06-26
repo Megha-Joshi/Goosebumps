@@ -25,14 +25,14 @@ export const videos = [
     url: "https://www.youtube.com/watch?v=eL85jA5HwJ8",
   },
   {
-    _id: "nXSKMHRnrR8",
-    title: "7 Abandoned Places in Europe",
-    creator: "World Unearthed",
-    thumbnail: "https://i3.ytimg.com/vi/nXSKMHRnrR8/maxresdefault.jpg",
-    views: "3,994 views",
-    date: "Jul 29, 2021",
+    _id: "DUythHvSfJE",
+    title: "Abandoned Places in Europe",
+    creator: "Secret Truths",
+    thumbnail: "https://i3.ytimg.com/vi/DUythHvSfJE/maxresdefault.jpg",
+    views: "10,670 views",
+    date: "Jan 23, 2020",
     category: "Abandoned",
-    url: "https://www.youtube.com/watch?v=nXSKMHRnrR8"
+    url: "https://www.youtube.com/watch?v=DUythHvSfJE"
   },
   {
     _id: "afTaB3qkyNc",
