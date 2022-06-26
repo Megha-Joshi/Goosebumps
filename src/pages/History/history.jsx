@@ -31,7 +31,6 @@ return (
             <button className="card-icon" onClick={() => clearHistory(token)}>CLEAR ALL</button>
             <div className="card-cont">
 
-                {history.length === 0 && <h2 className="no-video">No video to show</h2>}
                 {history.map((historyVideo) => (
                     <article className="card">
                     <img src={historyVideo.thumbnail} className="card-img" />
