@@ -22,8 +22,3 @@
     cursor: pointer;
     font-size: 1.2rem;
 }
-
-.home-btn:hover{
-    color: var(--btn-hover-color);
-    text-decoration: underline;
-}
