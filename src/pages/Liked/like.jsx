@@ -28,8 +28,8 @@ return (
             </div>
             <div className="card-cont">
 
+                {likedVideos.length === 0 && <h2 className="no-video">No video to show</h2>}
                 {likedVideos.map((likedVideo) => (
-
                 <article className="card">
                     <img src={likedVideo.thumbnail} className="card-img" />
                         <h3 className="card-title">{likedVideo.title}</h3>
