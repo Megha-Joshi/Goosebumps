@@ -261,41 +261,23 @@ const removePlaylistHandler = async (token, playlistID) => {
     }
 }
 
-// const getVideosFromPlaylistHandler = async () =>{
-//     const { token } = useAuth();
-//     try{
-//         const response = await axios({
-//             method: "GET",
-//             url: "/api/user/playlists",
-//             headers: {
-//                 authorization : token
-//             },
-//         });
+const getVideosFromPlaylistHandler = async () =>{
+    const { token } = useAuth();
+    try{
+        const response = await axios({
+            method: "GET",
+            url: "/api/user/playlists",
+            headers: {
+                authorization : token
+            },
+        })
 
-//         if(response.status === 200)
-//             return response.data;
-//     }catch(error) {
-//         console.error(error.response);
-//     }
-// }
-
-// const addVideoToPlaylistHandler = async (token, currVideo, playlistID) => {
-//     try{
-//         const response = await axios({
-//             method: "POST",
-//             url: `/api/user/playlists/${playlistID}`,
-//             data: {currVideo},
-//             headers: {
-//                 authorization : token
-//             },
-//         });
-
-//         if(response.status === 200 || response.status === 201)
-//             return response.data;
-//     }catch(error){
-//         console.error(error.response);
-//     }
-// }
+        if(response.status === 200)
+            return response.data;
+    }catch(error) {
+        console.error(error.response);
+    }
+}
 
 const addVideoToPlaylistHandler = async (token, video, playlistID ) =>{
     try {
@@ -332,4 +314,4 @@ const removeVideoFromPlaylistHandler = async (token, videoID, playlistID) => {
 
 
 
-export { getVideos, getCategories, getLikedVideosHandler, addItemToLikedVideosHandler, removeItemFromLikedVideosHandler, getWatchLaterVideosHandler, addItemToWatchLaterVideosHandler, removeItemFromWatchLaterVideosHandler, getHistoryVideosHandler, addVideoToHistoryHandler, removeVideoFromHistoryHandler, clearHistoryHandler, getAllPlaylistsHandler, addNewPlaylistHandler, removePlaylistHandler, addVideoToPlaylistHandler, removeVideoFromPlaylistHandler };
+export { getVideos, getCategories, getLikedVideosHandler, addItemToLikedVideosHandler, removeItemFromLikedVideosHandler, getWatchLaterVideosHandler, addItemToWatchLaterVideosHandler, removeItemFromWatchLaterVideosHandler, getHistoryVideosHandler, addVideoToHistoryHandler, removeVideoFromHistoryHandler, clearHistoryHandler, getAllPlaylistsHandler, addNewPlaylistHandler, removePlaylistHandler, addVideoToPlaylistHandler, removeVideoFromPlaylistHandler, getVideosFromPlaylistHandler };

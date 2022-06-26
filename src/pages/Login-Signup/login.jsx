@@ -9,14 +9,6 @@ const { token, loginHandler } = useAuth();
 const navigate = useNavigate();
 const [ userDetails, setUserDetails] = useState({email: "", password: ""});
 
-// const guestUserDetails = (e) =>{
-//     e.preventDefault();
-// setUserDetails({
-// email: "adarshbalika@gmail.com",
-// password: "adarshBalika123"
-// })
-// }
-
 const guestUserHandler = (event) => {
     event.preventDefault();
     setUserDetails({
@@ -29,12 +21,6 @@ function formHandler(e){
     e.preventDefault();
       loginHandler(userDetails);
 }
-
-// useEffect(()=>{
-// if(token){
-// navigate("/homepage");
-// }
-// },[token,navigate]);
 
 return(
 <div className="login-container justify-align">
