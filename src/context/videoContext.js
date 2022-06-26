@@ -2,7 +2,7 @@ import { createContext, useContext } from "react";
 import { useReducer } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { addVideoToHistoryHandler, clearHistoryHandler, getCategories, getVideos, removeVideoFromHistoryHandler, addItemToLikedVideosHandler, removeItemFromLikedVideosHandler, addItemToWatchLaterVideosHandler, removeItemFromWatchLaterVideosHandler } from "../services/videosAPI";
+import { addVideoToHistoryHandler, clearHistoryHandler, getCategories, getVideos, removeVideoFromHistoryHandler, addItemToLikedVideosHandler, removeItemFromLikedVideosHandler, addItemToWatchLaterVideosHandler, removeItemFromWatchLaterVideosHandler, addNewPlaylistHandler, removePlaylistHandler, addVideoToPlaylistHandler, removeVideoFromPlaylistHandler } from "../services/videosAPI";
 
 const VideoContext = createContext();
 
@@ -12,6 +12,7 @@ const initialState = {
     likedVideos: [],
     watchLater: [],
     history: [],
+    playlists: [],
 }
 
 const VideoProvider = ({children}) => {
@@ -71,6 +72,28 @@ const VideoProvider = ({children}) => {
                     ...videoState,
                     history: action.payload,
                 }
+
+            case "ADD_PLAYLIST":
+                return{
+                    ...videoState,
+                    playlists: action.payload,
+                }
+            
+            case "DELETE_PLAYLIST":
+                return{
+                    ...videoState,
+                    playlists: action.payload,
+                }
+
+            case "ADD_VIDEO_TO_PLAYLIST":
+                const newPlaylist = videoState.playlists.reduce((acc,curr)=>{
+                    return action.payload._id === curr._id ? [...acc, action.payload] : [...acc,curr]
+                },[])
+    
+            return {
+                ...videoState,
+                playlists: newPlaylist
+            };
         }
     }
 
@@ -177,7 +200,53 @@ const [ videoState, videoDispatch ] = useReducer(videoReducerFun, initialState);
         }
     }
 
-    return <VideoContext.Provider value={{videoState, videoDispatch, addItemToLikedVideos, removeItemFromLikedVideos, addItemToWatchLaterVideos, removeItemFromWatchLaterVideos,addVideoToHistory, removeVideoFromHistory, clearHistory}}>{children}</VideoContext.Provider>
+    const addNewPlaylist = async (token, playlistName) =>{
+        if(token){
+            try{
+                const response = await addNewPlaylistHandler(token, playlistName);
+                videoDispatch({type: "ADD_PLAYLIST", payload: response.playlists})
+            }catch(error){
+                console.log(error)
+            }
+        }else{
+            navigate("/login");
+        }
+    }
+    
+    const removePlaylist = async(token, playlistID) =>{
+        try{
+            const response = await removePlaylistHandler(token, playlistID);
+            videoDispatch({type: "DELETE_PLAYLIST", payload: response.playlists})
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+    const addVideoToPlaylist = async (token, currvideo, playlistID) =>{
+        if(token){
+            try{
+                const response = await addVideoToPlaylistHandler(token, currvideo, playlistID);
+                videoDispatch({type: "ADD_VIDEO_TO_PLAYLIST", payload: response.playlist})
+            }catch(error){
+                console.log(error)
+            }
+        }else{
+            navigate("/login");
+        }
+    }
+
+    const removeVideoFromPlaylist = async(token ,videoID, playlistID) =>{
+        try{
+            const response = await removeVideoFromPlaylistHandler(token, videoID, playlistID);
+            videoDispatch({type: "ADD_VIDEO_TO_PLAYLIST", payload: response.playlist})
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+
+
+    return <VideoContext.Provider value={{videoState, videoDispatch, addItemToLikedVideos, removeItemFromLikedVideos, addItemToWatchLaterVideos, removeItemFromWatchLaterVideos,addVideoToHistory, removeVideoFromHistory, clearHistory, addNewPlaylist, removePlaylist, addVideoToPlaylist, removeVideoFromPlaylist}}>{children}</VideoContext.Provider>
 }
 
 
