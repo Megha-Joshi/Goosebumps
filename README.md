@@ -26,6 +26,8 @@ Explore [ Shadow ](https://hidden-shadow.netlify.app/) and enjoy the videos.
 - Add videos to watch later
 - View all the watches later videos separately
 - History is preserved for video you have watched
+- Create / Delete Playlist
+- Add / delete videos from playlist
 - Authentication pages
 Log In
 Sign Up
