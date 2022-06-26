@@ -23,6 +23,10 @@
     cursor: pointer;
 }
 
+.chips-item:hover{
+    background-color: var(--primary-color);
+}
+
 .card-cont{
     display: flex;
     flex-wrap: wrap;
@@ -44,12 +48,6 @@
     border-radius: 5px;
     cursor: pointer;
 }
-
-/* .card-head{
-    display: flex;
-    justify-content: space-between;
-    margin-right: 5px;
-} */
 
 .card-title{
     color: var(--font-color);
@@ -91,6 +89,10 @@
     margin: 5px;
 }
 
+.card-icon:hover{
+    color: var(--primary-color);
+}
+
 .modal-cont{
      display: flex;
      justify-content: flex-end;
@@ -106,4 +108,19 @@
 .page-head{
     color: var(--font-color);
     border-bottom: 1px solid var(--accent-color);
+}
+
+.modal-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.modal-subhead{
+    margin: 1.5rem 0rem;
+}
+
+.center-btn{
+    margin-left: 7rem;
 }

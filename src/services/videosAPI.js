@@ -205,4 +205,131 @@ const clearHistoryHandler = async (token) => {
     }
 }
 
-export { getVideos, getCategories, getLikedVideosHandler, addItemToLikedVideosHandler, removeItemFromLikedVideosHandler, getWatchLaterVideosHandler, addItemToWatchLaterVideosHandler, removeItemFromWatchLaterVideosHandler, getHistoryVideosHandler, addVideoToHistoryHandler, removeVideoFromHistoryHandler, clearHistoryHandler };
+const getAllPlaylistsHandler = async () =>{
+    const { token } = useAuth();
+    try{
+        const response = await axios({
+            method: "GET",
+            url: "/api/user/playlists",
+            headers: {
+                authorization : token
+            },
+        });
+
+        if(response.status === 200)
+            return response.data;
+    }catch(error) {
+        console.error(error.response);
+    }
+}
+
+const addNewPlaylistHandler = async (token, playlistName) => {
+    try{
+        const response = await axios.post("/api/user/playlists", 
+        {
+          playlist: {
+            title: playlistName,
+            description: "",
+          },
+        },
+        {
+          headers : { authorization : token}
+        } 
+        )
+
+        if(response.status === 200 || response.status === 201)
+            return response.data;
+    }catch(error){
+        console.error(error.response);
+    }
+}
+
+const removePlaylistHandler = async (token, playlistID) => {
+    try{
+        const response = await axios({
+            method: "DELETE",
+            url: `/api/user/playlists/${playlistID}`,
+            headers:{
+                authorization: token
+            },
+        })
+
+        if(response.status === 200 || response.status === 201)
+            return response.data;
+    }catch(error){
+        console.error(error.response);
+    }
+}
+
+// const getVideosFromPlaylistHandler = async () =>{
+//     const { token } = useAuth();
+//     try{
+//         const response = await axios({
+//             method: "GET",
+//             url: "/api/user/playlists",
+//             headers: {
+//                 authorization : token
+//             },
+//         });
+
+//         if(response.status === 200)
+//             return response.data;
+//     }catch(error) {
+//         console.error(error.response);
+//     }
+// }
+
+// const addVideoToPlaylistHandler = async (token, currVideo, playlistID) => {
+//     try{
+//         const response = await axios({
+//             method: "POST",
+//             url: `/api/user/playlists/${playlistID}`,
+//             data: {currVideo},
+//             headers: {
+//                 authorization : token
+//             },
+//         });
+
+//         if(response.status === 200 || response.status === 201)
+//             return response.data;
+//     }catch(error){
+//         console.error(error.response);
+//     }
+// }
+
+const addVideoToPlaylistHandler = async (token, video, playlistID ) =>{
+    try {
+        const response = await axios({
+            method : "post",
+            headers : { authorization : token },
+            data : { video },
+            url : `/api/user/playlists/${playlistID}`,
+        })
+        if(response.status === 200 || response.status === 201)
+            return response.data
+    }
+    catch(error) {
+        console.log(error.response)
+    }
+}
+
+const removeVideoFromPlaylistHandler = async (token, videoID, playlistID) => {
+    try{
+        const response = await axios({
+            method: "DELETE",
+            url: `/api/user/playlists/${playlistID}/${videoID}`,
+            headers:{
+                authorization: token
+            },
+        });
+
+        if(response.status === 200)
+            return response.data;
+    }catch(error){
+        console.error(error.response);
+    }
+}
+
+
+
+export { getVideos, getCategories, getLikedVideosHandler, addItemToLikedVideosHandler, removeItemFromLikedVideosHandler, getWatchLaterVideosHandler, addItemToWatchLaterVideosHandler, removeItemFromWatchLaterVideosHandler, getHistoryVideosHandler, addVideoToHistoryHandler, removeVideoFromHistoryHandler, clearHistoryHandler, getAllPlaylistsHandler, addNewPlaylistHandler, removePlaylistHandler, addVideoToPlaylistHandler, removeVideoFromPlaylistHandler };

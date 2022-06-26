@@ -10,6 +10,8 @@ import { History } from "./pages/History/history";
 import { WatchLater } from "./pages/WatchLater/watchLater";
 import { PrivateRoute } from "./video-components/privateRoute/privateRoute.jsx" 
 import { Stream } from "./pages/Stream/stream";
+import { Playlist } from "./pages/Playlist/playlists";
+import { SinglePlaylist } from "./pages/Playlist/singlePlaylist";
 
 
 function App() {
@@ -29,6 +31,8 @@ function App() {
         <Route path="/like" element={<Like />}/>
         <Route path="/history" element={<History />}/>
         <Route path="/watchlater" element={<WatchLater />}/>
+        <Route path = "/playlists" element = { <Playlist />} />
+        <Route path = "/playlists/:playlistID" element = { <SinglePlaylist />} />
         </Route>
 
       </Routes>

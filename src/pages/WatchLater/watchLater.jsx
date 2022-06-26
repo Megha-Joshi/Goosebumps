@@ -30,6 +30,7 @@ return (
             </div>
             <div className="card-cont">
 
+                {watchLater.length === 0 && <h2 className="no-video">No video to show</h2>}
                 {watchLater.map((watchLaterVideo) => (
                     <article className="card">
                     <img src={watchLaterVideo.thumbnail} className="card-img" />
