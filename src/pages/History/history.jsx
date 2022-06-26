@@ -49,7 +49,8 @@ return (
                                     ></i></span>
                         </li>
                         <li className="modal-list" onClick={() => removeVideoFromHistory(historyVideo._id, token)}><span className="card-icon"><i
-                                    class="fad fa-trash-alt"></i></span></li>
+                                    class="fad fa-trash-alt"></i></span>
+                        </li>
                     </div>
 
                 </article>

@@ -11,21 +11,22 @@ const SinglePlaylist = () => {
 
 const [sidebar, setSideBar] = useState(true);
 const { playlistID } = useParams();
-const { videoState, addVideoToHistory, removeVideoFromPlaylist, removeItemFromLikedVideos, addItemToLikedVideos, addItemToWatchLaterVideos, removeItemFromWatchLaterVideos } = useVideo();
+const { videoState, addVideoToHistory, removeVideoFromPlaylist, removeItemFromLikedVideos, addItemToLikedVideos,
+addItemToWatchLaterVideos, removeItemFromWatchLaterVideos } = useVideo();
 const { playlists } = videoState;
 const { token } = useAuth();
 
 const currPlaylist = playlists.filter((playlist) => playlist._id === playlistID)[0];
 
 const likeHandler = (token, video) => {
-    videoState.likedVideos.some((item) => item._id === video._id) ?
-    removeItemFromLikedVideos(video._id, token) :
-    addItemToLikedVideos(token,video)
-    }
+videoState.likedVideos.some((item) => item._id === video._id) ?
+removeItemFromLikedVideos(video._id, token) :
+addItemToLikedVideos(token,video)
+}
 
 const watchLaterHandler = ( token, video) => {
-    videoState.watchLater.some((item) => item._id === video._id) ?
-    removeItemFromWatchLaterVideos(video._id, token) : addItemToWatchLaterVideos(token,video)
+videoState.watchLater.some((item) => item._id === video._id) ?
+removeItemFromWatchLaterVideos(video._id, token) : addItemToWatchLaterVideos(token,video)
 }
 
 
@@ -62,7 +63,8 @@ return (
                                     video._id)? "fas fa-clock" : "far fa-clock" }></i></span>
                         </li>
 
-                        <li className="modal-list" onClick={()=> removeVideoFromPlaylist(token, video._id, playlistID)}><i className="fad fa-trash-alt card-icon"></i>
+                        <li className="modal-list" onClick={()=> removeVideoFromPlaylist(token, video._id,
+                            playlistID)}><i className="fad fa-trash-alt card-icon"></i>
                         </li>
                     </div>
                 </article>

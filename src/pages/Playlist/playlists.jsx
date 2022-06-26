@@ -32,28 +32,28 @@ return (
             </div>
             <div className="card-cont">
 
-                    {playlists.length === 0 && <h2 className="no-video">No playlist to show</h2>}
-                    {playlists.length > 0 &&
-                    playlists.map((playlist)=> (
+                {playlists.length === 0 && <h2 className="no-video">No playlist to show</h2>}
+                {playlists.length > 0 &&
+                playlists.map((playlist)=> (
 
-                    <article className="card relative" key={playlist._id}>
-                        <Link to={`/playlists/${playlist._id}`}> <img src={playlistThumbnail(playlist)}
-                            className="card-img" alt="Video Thumbnail" />
-                        </Link>
-                        <div className="video-count">
-                            <p className="count">{playlist.videos.length}</p>
-                        </div>
-                        <div className="card-footer">
-                                <p className="card-title">{playlist.title}</p>
-                                <span className="trash-icon" onClick={()=> removePlaylist(token, playlist._id)}><i
-                                        className="fad fa-trash-alt card-icon"></i></span>
-                        </div>
-                    </article>
+                <article className="card relative" key={playlist._id}>
+                    <Link to={`/playlists/${playlist._id}`}> <img src={playlistThumbnail(playlist)} className="card-img"
+                        alt="Video Thumbnail" />
+                    </Link>
+                    <div className="video-count">
+                        <p className="count">{playlist.videos.length}</p>
+                    </div>
+                    <div className="card-footer">
+                        <p className="card-title">{playlist.title}</p>
+                        <span className="trash-icon" onClick={()=> removePlaylist(token, playlist._id)}><i
+                                className="fad fa-trash-alt card-icon"></i></span>
+                    </div>
+                </article>
 
-                    )
-                    )
-                    }
-                </div>
+                )
+                )
+                }
+            </div>
         </section>
     </main>
 </div>
