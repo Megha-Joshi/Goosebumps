@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import {loginAPI, signupAPI} from "../services/authAPI.js";
 import "../pages/Login-Signup/login.jsx";
 import "../pages/Login-Signup/signup.jsx";
-import { toast } from 'react-hot-toast';
 
 const AuthContext = createContext();
 
@@ -14,6 +13,7 @@ const AuthProvider = ({children}) => {
     const [user, setUser] = useState(x);
 
     const loginHandler = async ( user ) =>{
+        console.log("entered login")
         try{
             const response = await loginAPI(user)
             if (response.status === 200){
@@ -24,10 +24,8 @@ const AuthProvider = ({children}) => {
                 console.log("in login handler")
                 navigate("/homepage")
             }
-            toast.success("Logged In Successfully");
         }
         catch(err){
-            toast.error("Cannot login in");
             console.log(err)
         }
 
@@ -43,16 +41,14 @@ const AuthProvider = ({children}) => {
                 setToken(response.data.encodedToken);
                 setUser(response.data.createdUser)
                 navigate("/homepage")
+   
             }
-            toast.success("Signed Up Successfully");
         } catch (err) {
-            toast.error("Cannot sign in");
             console.log(err)
         }
     }
 
     const logoutHandler = () =>{
-        toast.success("Logged out");
         navigate("/");
         localStorage.removeItem("token");
         localStorage.removeItem("user");
