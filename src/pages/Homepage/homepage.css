@@ -11,6 +11,7 @@
     display: flex;
     gap: 10px;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .chips-item{
@@ -43,7 +44,7 @@
 }
 
 .card-img{
-    width: 20rem;
+    width: 100%;
     height: 12rem;
     border-radius: 5px;
     cursor: pointer;
@@ -124,3 +125,20 @@
 .center-btn{
     margin-left: 7rem;
 }
+
+@media screen and (max-width: 460px) {
+    .chips-cont{
+        gap: 0px;
+    }
+
+    .chips-item{
+        margin: 8px;
+    }
+}
+/* 
+@media screen and (max-width: 350px) {
+    .card-img{
+        width: 15rem;
+        height: 8rem;
+    }
+} */

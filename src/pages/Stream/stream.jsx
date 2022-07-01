@@ -42,8 +42,8 @@ return (
                 <div className="video-cont">
                     <section>
                         <ReactPlayer 
-                            url={`https://www.youtube.com/watch?v=${videoID}`} width="56.25rem" height="27.5rem"
-                            controls={true}>    
+                            url={`https://www.youtube.com/watch?v=${videoID}`} width="100%" height="27.5rem"
+                            controls={true} playing={true}>    
                             </ReactPlayer>
                     </section>
                     <section className="video-content">

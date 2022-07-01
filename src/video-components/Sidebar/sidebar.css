@@ -27,3 +27,23 @@ li{
     padding: 10px;
 }
 
+@media screen and (max-width: 570px) {
+
+    ul{
+        padding: 10px;
+    }
+}
+
+
+@media screen and (max-width: 370px) {
+    ul{
+        padding: 0px;
+    }
+}
+
+/* @media screen and (max-width: 450px) {
+    .home-content{
+        right: 25%;
+    }
+} */
+

@@ -27,3 +27,23 @@
     color: var(--btn-hover-color);
     text-decoration: underline;
 }
+
+@media screen and (max-width: 1200px) {
+
+    .home-content{
+        top: 80%;
+        right: 40%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .home-content{
+        right: 30%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .home-content{
+        right: 25%;
+    }
+}
