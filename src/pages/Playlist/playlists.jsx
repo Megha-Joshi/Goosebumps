@@ -10,7 +10,6 @@ import { useAuth } from "../../context/authContext";
 
 const Playlist = () => {
 
-const [sidebar, setSideBar] = useState(true);
 const { videoState, removePlaylist } = useVideo();
 const { playlists } = videoState;
 const { token } = useAuth();
@@ -22,10 +21,11 @@ return playlist.videos.length > 0 &&
 
 return (
 <div className="App">
-    <Navbar sidebar={sidebar} setSideBar={setSideBar} />
+    <Navbar />
     <main className="main-cont">
-        {sidebar ?
-        <Sidebar /> : null}
+        <div className="side-cont-hide">
+            <Sidebar />
+        </div>
         <section className="right-cont">
             <div className="chips-cont">
                 <h2 className="page-head">Playlist</h2>
@@ -49,7 +49,6 @@ return (
                                 className="fad fa-trash-alt card-icon"></i></span>
                     </div>
                 </article>
-
                 )
                 )
                 }

@@ -1,23 +1,34 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../../root.css";
 import "../Navbar/navbar.css";
+import { Sidebar } from "../Sidebar/sidebar";
 
-const Navbar = ({sidebar, setSideBar}) => {
+const Navbar = () => {
+const [sidebar, setSideBar] = useState(false);
 return(
-<nav className="nav-cont">
-    <div className="left-nav">
-        {sidebar ?
-        (<button className="nav-btn" onClick={()=> setSideBar(false)}><i class="fas fa-ghost fa-2x"></i></button>)
-        :
-        (<button className="nav-btn" onClick={()=> setSideBar(true)}><i
-                class="fas fa-skull-crossbones fa-2x"></i></button>)
-        }
-        <h3>SHADOW</h3>
+<div>
+  <nav className="nav-cont">
+    <h3>SHADOW</h3>
+    <div className="right-nav">
+      {sidebar ?
+      (<button className="nav-btn" onClick={()=> setSideBar(false)}><i
+          class="fas fa-ghost fa-2x bars-hide"></i></button>)
+      :
+      (<button className="nav-btn" onClick={()=> setSideBar(true)}><i
+          class="fas fa-skull-crossbones fa-2x bars-hide"></i></button>)
+      }
+      <NavLink to="/login">
+        <button className="nav-btn"><i class="fas fa-sign-in-alt fa-2x"></i></button>
+      </NavLink>
     </div>
-    <NavLink to="/login">
-    <button className="nav-btn"><i class="fas fa-sign-in-alt fa-2x"></i></button>
-    </NavLink>
-</nav>
+  </nav>
+  {sidebar &&
+  <div className="sidebar-cont">
+    <Sidebar />
+  </div>
+  }
+</div>
 )
 }
 

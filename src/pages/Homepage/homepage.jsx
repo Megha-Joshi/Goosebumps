@@ -11,7 +11,6 @@ import { NavLink } from "react-router-dom";
 import Modal from 'react-modal';
 
 const Homepage = () => {
-const [sidebar, setSideBar] = useState(true);
 const { videoState, addVideoToHistory, addItemToLikedVideos, removeItemFromLikedVideos, addItemToWatchLaterVideos,
 removeItemFromWatchLaterVideos, addNewPlaylist, addVideoToPlaylist, removeVideoFromPlaylist } = useVideo();
 const { videos, categories } = videoState;
@@ -33,50 +32,54 @@ removeItemFromWatchLaterVideos(video._id, token) : addItemToWatchLaterVideos(tok
 }
 
 const playListHandler = ( token, video ) => {
-    if(token){
-        setModal(true);
-        var currVideo = videoState.videos.find((item) => item._id === video._id); 
-        setCurrVideoState(currVideo);
-    }
+if(token){
+setModal(true);
+var currVideo = videoState.videos.find((item) => item._id === video._id);
+setCurrVideoState(currVideo);
+}
 }
 
 const isVideoExistInPlaylist = (playlist) => playlist.videos.some((video) => video._id === currVideoState._id);
 
 const checkVideoInPlaylistHandler = (currVideoState, playlist) => {
-    isVideoExistInPlaylist(playlist) ? removeVideoFromPlaylist(token, currVideoState._id, playlist._id) : addVideoToPlaylist(token, currVideoState, playlist._id);
-   }
+isVideoExistInPlaylist(playlist) ? removeVideoFromPlaylist(token, currVideoState._id, playlist._id) :
+addVideoToPlaylist(token, currVideoState, playlist._id);
+}
 
-const  makeNewPlaylistHandler = (playlistName) => {
-    playlistName && addNewPlaylist(token, playlistName);
-    setPlaylistName("");
-  }
+const makeNewPlaylistHandler = (playlistName) => {
+playlistName && addNewPlaylist(token, playlistName);
+setPlaylistName("");
+}
 
 const customStyle = {
-    overlay: {
-      top: "6rem",
-      backgroundColor: "rgba(52, 58, 64, 0.8)",
-    },
-    content: {
-      width: "18rem",
-      height: "20rem",
-      margin: "5rem auto",
-      backgroundColor: "var(--accent-color)",
-    },
-  };
+overlay: {
+top: "6rem",
+backgroundColor: "rgba(52, 58, 64, 0.8)",
+},
+content: {
+width: "18rem",
+height: "20rem",
+margin: "5rem auto",
+backgroundColor: "var(--accent-color)",
+},
+};
 
 return (
 <div className="App">
-    <Navbar sidebar={sidebar} setSideBar={setSideBar} />
+    <Navbar />
     <main className="main-cont">
-        {sidebar ?
-        <Sidebar /> : null}
+        <div className="side-cont-hide">
+            <Sidebar />
+        </div>
         <section className="right-cont">
 
             <div className="chips-cont">
                 {categories.map((category) => (
-                <div className="chips-item" onClick={()=> filterDispatch({type: "CATEGORY", payload: category.categoryName})}>{category.categoryName}</div>
+                <div className="chips-item" onClick={()=> filterDispatch({type: "CATEGORY", payload:
+                    category.categoryName})}>{category.categoryName}</div>
                 ))}
-                <div className="chips-item" onClick={()=> filterDispatch ({type: "CLEAR_FILTER", payload: {...filterState.allVideos}})}>CLEAR ALL</div>
+                <div className="chips-item" onClick={()=> filterDispatch ({type: "CLEAR_FILTER", payload:
+                    {...filterState.allVideos}})}>CLEAR ALL</div>
             </div>
             <div className="card-cont">
                 {filteredVideos(videos, filterState).map((video) => (
@@ -89,8 +92,8 @@ return (
                     <div className="card-footer">
                         <p className="card-content">{video.views}</p>
                         <p className="card-content">{video.date}</p>
-                        <li className="modal-list" onClick={() => playListHandler(token, video)}><span className="card-icon"><i
-                                    class="fad fa-list"></i></span>
+                        <li className="modal-list" onClick={()=> playListHandler(token, video)}><span
+                                className="card-icon"><i class="fad fa-list"></i></span>
                         </li>
                         <li className="modal-list" onClick={()=> likeHandler(token,video)}><span
                                 className="card-icon"><i className={videoState.likedVideos.some((item)=> item._id
@@ -108,34 +111,33 @@ return (
         </section>
 
         {
-            modal && (
-                <Modal isOpen={ modal } style={ customStyle }>
-                    <header className="modal-header">
-                        <h3 className="card-title">Create New Playlist</h3>
-                        <i class="fas fa-times card-icon" onClick={() => setModal(false)}></i>
-                    </header>
-                    <section>
-                        {
-                            videoState.playlists.length > 0 && 
-                            videoState.playlists.map((playlist) => {
-                                return(
-                                    <div key={playlist._id}>
-                                        <input type = "checkbox" checked={isVideoExistInPlaylist(playlist)} 
-                                        onChange={() => checkVideoInPlaylistHandler(currVideoState, playlist)}/>
-                                        <span className="card-content">{playlist.title}</span>
-                                    </div>
-                                );
-                            })
-                        }
-                    </section>
-                    <main className="modal-subhead">
-                        <label className="card-subhead">Name</label>
-                        <input type="text" value={playlistName}
-                        onChange={(e) => setPlaylistName(e.target.value)}/>
-                    </main>
-                    <button className= "login-btn center-btn" onClick={() => makeNewPlaylistHandler(playlistName)}>Create</button>
-                </Modal>
-            )
+        modal && (
+        <Modal isOpen={ modal } style={ customStyle }>
+            <header className="modal-header">
+                <h3 className="card-title">Create New Playlist</h3>
+                <i class="fas fa-times card-icon" onClick={()=> setModal(false)}></i>
+            </header>
+            <section>
+                {
+                videoState.playlists.length > 0 &&
+                videoState.playlists.map((playlist) => {
+                return(
+                <div key={playlist._id}>
+                    <input type="checkbox" checked={isVideoExistInPlaylist(playlist)} onChange={()=>
+                    checkVideoInPlaylistHandler(currVideoState, playlist)}/>
+                    <span className="card-content">{playlist.title}</span>
+                </div>
+                );
+                })
+                }
+            </section>
+            <main className="modal-subhead">
+                <label className="card-subhead">Name</label>
+                <input type="text" value={playlistName} onChange={(e)=> setPlaylistName(e.target.value)}/>
+            </main>
+            <button className="login-btn center-btn" onClick={()=> makeNewPlaylistHandler(playlistName)}>Create</button>
+        </Modal>
+        )
         }
     </main>
 </div>

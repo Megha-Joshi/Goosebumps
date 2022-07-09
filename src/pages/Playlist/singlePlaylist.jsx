@@ -3,13 +3,11 @@ import { Sidebar } from "../../video-components/Sidebar/sidebar";
 import { Link, useParams } from "react-router-dom";
 import "../../root.css"
 import "../Homepage/homepage.css";
-import { useState } from "react";
 import { useVideo } from "../../context/videoContext";
 import { useAuth } from "../../context/authContext";
 
 const SinglePlaylist = () => {
 
-const [sidebar, setSideBar] = useState(true);
 const { playlistID } = useParams();
 const { videoState, addVideoToHistory, removeVideoFromPlaylist, removeItemFromLikedVideos, addItemToLikedVideos,
 addItemToWatchLaterVideos, removeItemFromWatchLaterVideos } = useVideo();
@@ -32,10 +30,11 @@ removeItemFromWatchLaterVideos(video._id, token) : addItemToWatchLaterVideos(tok
 
 return (
 <div className="App">
-    <Navbar sidebar={sidebar} setSideBar={setSideBar} />
+    <Navbar />
     <main className="main-cont">
-        {sidebar ?
-        <Sidebar /> : null}
+        <div className="side-cont-hide">
+            <Sidebar />
+        </div>
         <section className="right-cont">
             <div className="chips-cont">
                 <h2 className="page-head">Playlist</h2>
