@@ -19,7 +19,7 @@ return (
     <li className="nav-list"><span className="nav-icon"><i class="fas fa-list"></i></span>Playlist</li>
     </NavLink>
     <NavLink style={currentActiveColor} to="/like" className="text-link">
-    <li className="nav-list"><span className="nav-icon"><i class="fas fa-thumbs-up"></i></span>Liked Videos</li>
+    <li className="nav-list"><span className="nav-icon"><i class="fas fa-thumbs-up"></i></span>Liked</li>
     </NavLink>
     <NavLink style={currentActiveColor} to="/watchlater" className="text-link">
     <li className="nav-list"><span className="nav-icon"><i class="fas fa-clock"></i></span>Watch Later</li>

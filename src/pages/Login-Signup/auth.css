@@ -17,8 +17,8 @@
 }
 
 .form-container {
-    width: 25%;
-    height: 53%;
+    width: auto;
+    height: auto;
     padding: 1rem;
     background-color: var(--secondary-color);
     border-radius: 5px;
@@ -55,18 +55,18 @@
 
 /* New */
 
-.inp-txt{
+.inp-txt {
     color: var(--font-color);
 }
 
-fieldset{
+fieldset {
     height: 2.188rem;
     border-radius: 5px;
     text-align: start;
     margin: 0.938rem;
 }
 
-.text-btn{
+.text-btn {
     background-color: transparent;
     border: none;
     color: var(--primary-color);
@@ -74,11 +74,11 @@ fieldset{
     cursor: pointer;
 }
 
-.text-btn:hover{
+.text-btn:hover {
     text-decoration: underline;
 }
 
-.login-btn{
+.login-btn {
     background-color: var(--btn-hover-color);
     color: var(--font-color);
     border: none;
@@ -89,6 +89,6 @@ fieldset{
     cursor: pointer;
 }
 
-.login-btn:hover{
+.login-btn:hover {
     background-color: var(--primary-color);
 }

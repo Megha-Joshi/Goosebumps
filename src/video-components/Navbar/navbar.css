@@ -1,4 +1,4 @@
-.nav-cont{
+.nav-cont {
     display: flex;
     background-color: var(--primary-color);
     color: var(--font-color);
@@ -7,15 +7,31 @@
     align-items: center;
 }
 
-.left-nav{
+.right-nav {
     display: flex;
-    gap: 10px;
     color: var(--font-color);
+    justify-content: space-around;
+    gap: 10px;
+
 }
 
-.nav-btn{
+.nav-btn {
     background-color: transparent;
     border: none;
     cursor: pointer;
     color: var(--font-color);
+}
+
+.bars-hide {
+    display: none;
+}
+
+@media screen and (max-width: 500px) {
+    .bars-hide {
+        display: block;
+    }
+
+    .nav-cont {
+        width: 90%;
+    }
 }

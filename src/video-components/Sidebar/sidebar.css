@@ -1,4 +1,4 @@
-.side-cont{
+.side-cont {
     display: flex;
     width: 20%;
     height: 100%;
@@ -6,24 +6,38 @@
     background-color: var(--primary-color);
 }
 
-li{
+li {
     list-style-type: none;
 }
 
-.nav-list{
+.nav-list {
     padding: 10px;
     text-align: start;
     cursor: pointer;
+    width: max-content;
 }
 
-.nav-list:hover{
+.nav-list:hover {
     background-color: #909090;
     border-radius: 5px;
     color: var(--primary-color);
     font-weight: bold;
 }
 
-.nav-icon{
+.nav-icon {
     padding: 10px;
 }
 
+@media screen and (max-width: 600px) {
+
+    ul {
+        padding: 10px;
+    }
+}
+
+
+@media screen and (max-width: 370px) {
+    ul {
+        padding: 0px;
+    }
+}
