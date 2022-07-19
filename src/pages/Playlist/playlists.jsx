@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import "../../root.css"
 import "../Homepage/homepage.css";
 import "../Playlist/playlists.css"
-import { useState } from "react";
 import { useVideo } from "../../context/videoContext";
 import { useAuth } from "../../context/authContext";
 

@@ -10,16 +10,16 @@ const navigate = useNavigate();
 const [ userDetails, setUserDetails] = useState({email: "", password: ""});
 
 const guestUserHandler = (event) => {
-    event.preventDefault();
-    setUserDetails({
-        email: "adarshbalika@gmail.com",
-        password: "adarshBalika123",
-    })
+event.preventDefault();
+setUserDetails({
+email: "adarshbalika@gmail.com",
+password: "adarshBalika123",
+})
 }
 
 function formHandler(e){
-    e.preventDefault();
-      loginHandler(userDetails);
+e.preventDefault();
+loginHandler(userDetails);
 }
 
 return(
@@ -29,12 +29,14 @@ return(
         <fieldset>
             <legend for="username" className="inp-txt">Email</legend>
             <input type="text" id="username" name="username" placeholder="abc@gmail.com" className="input-box"
-                value={userDetails.email} onChange={(e) => setUserDetails({...userDetails, email: e.target.value})} required /><br />
+                value={userDetails.email} onChange={(e)=> setUserDetails({...userDetails, email: e.target.value})}
+            required /><br />
         </fieldset>
         <fieldset>
             <legend for="password" className="inp-txt">Password</legend>
             <input type="password" id="password" name="password" placeholder="**********" className="input-box"
-                value={userDetails.password} onChange={(e) => setUserDetails({...userDetails, password: e.target.value})} required />
+                value={userDetails.password} onChange={(e)=> setUserDetails({...userDetails, password: e.target.value})}
+            required />
         </fieldset>
         <div className="check-pass">
             <label for="checkbox">

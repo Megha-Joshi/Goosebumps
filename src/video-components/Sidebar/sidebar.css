@@ -18,7 +18,7 @@ li {
 }
 
 .nav-list:hover {
-    background-color: #909090;
+    background-color: var(--btn-hover-color);
     border-radius: 5px;
     color: var(--primary-color);
     font-weight: bold;

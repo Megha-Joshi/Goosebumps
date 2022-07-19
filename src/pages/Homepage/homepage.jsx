@@ -7,14 +7,16 @@ import "../Login-Signup/auth.css";
 import { useVideo } from "../../context/videoContext";
 import { useAuth } from "../../context/authContext";
 import { useFilter } from "../../context/filterContext";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Modal from 'react-modal';
+import toast from 'react-hot-toast';
 
 const Homepage = () => {
 const { videoState, addVideoToHistory, addItemToLikedVideos, removeItemFromLikedVideos, addItemToWatchLaterVideos,
 removeItemFromWatchLaterVideos, addNewPlaylist, addVideoToPlaylist, removeVideoFromPlaylist } = useVideo();
 const { videos, categories } = videoState;
 const { token } = useAuth();
+const navigate = useNavigate();
 const { filterState, filterDispatch, filteredVideos } = useFilter();
 const [ modal, setModal] = useState(false);
 const [playlistName, setPlaylistName ] = useState("");
@@ -36,6 +38,9 @@ if(token){
 setModal(true);
 var currVideo = videoState.videos.find((item) => item._id === video._id);
 setCurrVideoState(currVideo);
+}else{
+toast.error("Login First!");
+navigate("/login");
 }
 }
 
@@ -46,7 +51,7 @@ isVideoExistInPlaylist(playlist) ? removeVideoFromPlaylist(token, currVideoState
 addVideoToPlaylist(token, currVideoState, playlist._id);
 }
 
-const makeNewPlaylistHandler = (playlistName) => {
+const makeNewPlaylistHandler = (token, playlistName) => {
 playlistName && addNewPlaylist(token, playlistName);
 setPlaylistName("");
 }
@@ -135,7 +140,8 @@ return (
                 <label className="card-subhead">Name</label>
                 <input type="text" value={playlistName} onChange={(e)=> setPlaylistName(e.target.value)}/>
             </main>
-            <button className="login-btn center-btn" onClick={()=> makeNewPlaylistHandler(playlistName)}>Create</button>
+            <button className="login-btn center-btn" onClick={()=> makeNewPlaylistHandler(token,
+                playlistName)}>Create</button>
         </Modal>
         )
         }

@@ -1,15 +1,15 @@
-.video-cont{
+.video-cont {
     padding: 0.938rem;
     width: 70%;
 }
 
-.video-creator{
+.video-creator {
     text-align: start;
     padding: 1px 5px 5px 6px;
     color: var(--primary-color);
 }
 
-.video-title{
+.video-title {
     color: var(--font-color);
     text-align: start;
     padding: 5px;
@@ -18,22 +18,22 @@
     margin-bottom: 0px;
 }
 
-.video-head{
+.video-head {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.video-icons{
+.video-icons {
     display: flex;
     gap: 10px;
 }
 
-.video-footer{
+.video-footer {
     display: flex;
 }
 
-.video-txt{
+.video-txt {
     color: var(--font-color);
     text-align: start;
     padding: 5px;

@@ -37,14 +37,14 @@
 }
 
 @media screen and (max-width: 600px) {
-    
+
     .home-content {
         right: 34%;
     }
 }
 
 @media screen and (max-width: 450px) {
-    
+
     .home-content {
         right: 25%;
     }
