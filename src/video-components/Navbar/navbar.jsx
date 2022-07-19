@@ -11,12 +11,12 @@ return(
   <nav className="nav-cont">
     <h3>SHADOW</h3>
     <div className="right-nav">
-      {sidebar ?
-      (<button className="nav-btn" onClick={()=> setSideBar(false)}><i
-          class="fas fa-ghost fa-2x bars-hide"></i></button>)
+      {sidebar === true ?
+      (<button className="nav-btn bars-hide" onClick={()=> setSideBar(false)}><i
+          class="fas fa-ghost fa-2x"></i></button>)
       :
-      (<button className="nav-btn" onClick={()=> setSideBar(true)}><i
-          class="fas fa-skull-crossbones fa-2x bars-hide"></i></button>)
+      (<button className="nav-btn bars-hide" onClick={()=> setSideBar(true)}><i
+          class="fas fa-skull-crossbones fa-2x"></i></button>)
       }
       <NavLink to="/login">
         <button className="nav-btn"><i class="fas fa-sign-in-alt fa-2x"></i></button>
