@@ -10,7 +10,7 @@
 
 .home-content {
     position: absolute;
-    right: 19%;
+    right: 3%;
     top: 45%;
     color: var(--font-color);
 }
@@ -32,20 +32,20 @@
 
     .home-content {
         top: 80%;
-        right: 40%;
+        right: 30%;
     }
 }
 
 @media screen and (max-width: 600px) {
 
     .home-content {
-        right: 34%;
+        right: 15%;
     }
 }
 
 @media screen and (max-width: 450px) {
 
     .home-content {
-        right: 25%;
+        right: 4%;
     }
 }

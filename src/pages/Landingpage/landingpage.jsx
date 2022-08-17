@@ -8,9 +8,9 @@ return(
     <div className="body-cont">
         <img src="home-abandon.jpg" className="img-cont" />
         <div className="home-content">
-            <h1 className="home-txt">Welcome !!</h1>
+            <h1 className="home-txt">Welcome to Hidden Shadow!!</h1>
             <Link to="/homepage">
-            <button className="home-btn">Explore &gt;&gt;</button>
+            <button className="home-btn">Explore Videos&gt;&gt;</button>
             </Link>
         </div>
     </div>
