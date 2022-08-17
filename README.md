@@ -33,6 +33,7 @@ Log In
 Sign Up
 Log Out
 - Single video page
+- Fully Responsive
 
 <br />
 
